@@ -17,6 +17,6 @@ public class HomeController {
             String username = principal.getName();  // The authenticated user's email/username
             model.addAttribute("username", username);
         }
-        return "homePage"; // Replace with your actual home page view
+        return "/homePage"; // Replace with your actual home page view
     }
 }
