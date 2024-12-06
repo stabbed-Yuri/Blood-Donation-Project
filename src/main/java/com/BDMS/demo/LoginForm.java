@@ -8,9 +8,10 @@ import org.springframework.ui.Model;
 @Getter
 public class LoginForm {
     // Getters and Setters
-    private String email;
+    private String Username;
     private String password;
     private boolean rememberMe;
+
 
 
 }

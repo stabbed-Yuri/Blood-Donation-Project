@@ -35,17 +35,7 @@
         </nav>
 
         <!-- Mobile Menu -->
-        <nav id="mobile-menu" class="fixed top-0 right-0 w-3/4 h-full bg-red-500 text-white shadow-lg p-6 space-y-6 hidden">
-            <button id="close-btn" class="absolute top-4 right-4">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <a href="#" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Why Donate?</a>
-            <a href="#" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Contact Us</a>
-            <a href="login.html" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Login</a>
-            <a href="signUp.html" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Sign Up</a>
-        </nav>
+
     </div>
 </header>
 
@@ -56,7 +46,11 @@
     <!-- Main Content Container (Sign-Up Form) -->
     <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md mx-auto">
       <h2 class="text-center text-3xl font-extrabold text-gray-900">Sign Up to Donate</h2>
-
+        <div th:if="${success}"
+             class="alert success alert-dismissible fade show" role="alert">
+            <strong>Well done!</strong> You successfully signed up.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+        </div>
         <form action="#" th:action="@{/signUp}" th:object="${user}" method="post" class="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
             <h2 class="text-2xl font-bold text-center text-gray-900">Sign Up</h2>
 
@@ -123,14 +117,6 @@
                 <p class="text-sm text-red-600" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
 
-            <!-- Confirm Password -->
-            <div class="space-y-1">
-                <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" th:field="*{confirmPassword}"
-                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
-                       placeholder="Re-enter your password">
-                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
-            </div>
 
             <!-- Submit Button -->
             <button type="submit"

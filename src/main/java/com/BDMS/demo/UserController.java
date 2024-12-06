@@ -22,6 +22,7 @@ public class UserController {
     @GetMapping("/signUp")
     public String showSignUpForm(Model model) {
         model.addAttribute("user", new User());
+        model.addAttribute("success", false);
         return "signUp"; // Render sign-up page
     }
 
@@ -30,12 +31,6 @@ public class UserController {
         // Check if there were any validation errors in the user form
         if (bindingResult.hasErrors()) {
             return "signUp"; // If validation fails, return to sign-up page
-        }
-
-        // Check if passwords match
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            model.addAttribute("passwordError", "Passwords do not match");
-            return "signUp"; // If passwords don't match, return to sign-up page with an error
         }
 
         // Check if the email already exists
@@ -47,9 +42,11 @@ public class UserController {
         // Encode the password using BCryptPasswordEncoder before saving it to the database
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword); // Set the encoded password
+        userRepository.save(user);
+        model.addAttribute("success", true);
 
         // Save the user to the database
-        userRepository.save(user);
-        return "redirect:/login"; // Redirect to login page after successful sign-up
+
+        return "/signUp"; // Redirect to login page after successful sign-up
     }
 }

@@ -27,20 +27,22 @@ public class LoginController {
 
     @PostMapping("/login")
     public String handleLogin(LoginForm loginForm, Model model, HttpSession session) {
-        String email = loginForm.getEmail();
+        String username = loginForm.getUsername(); // Use username instead of email
         String password = loginForm.getPassword();
 
-        System.out.println("Login attempt: Email = " + email + ", Password = " + password);
+        System.out.println("Login attempt: Username = " + username + ", Password = " + password);
 
-        User user = userRepository.findByEmail(email);
+        // Fetch user by username
+        User user = userRepository.findByUsername(username);
 
         if (user == null) {
-            System.out.println("No user found with email: " + email);
+            System.out.println("No user found with username: " + username);
             return "redirect:/login?error=true";
         }
 
-        System.out.println("User found: " + user.getEmail());
+        System.out.println("User found: " + user.getUsername());
 
+        // Check password
         if (passwordEncoder.matches(password, user.getPassword())) {
             System.out.println("Password match successful!");
             session.setAttribute("user", user); // Save user to session
