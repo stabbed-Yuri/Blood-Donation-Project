@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation - Sign Up</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header Section -->
+  <header class="bg-white shadow-lg">
+    <div class="flex items-center justify-between p-4">
+        <a href="homePage.html" class="flex items-center gap-2">
+            <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+            <h1 class="text-xl md:text-2xl font-bold text-red-500">BDMS Project</h1>
+        </a>
+      
+        <!-- Hamburger Icon for Small Devices -->
+        <div class="md:hidden">
+            <button id="menu-btn" class="text-red-500 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5h16.5M3.75 12h16.5m-16.5 4.5h16.5" />
+                </svg>
+            </button>
+        </div>
+
+        <!-- Links for Desktop -->
+        <nav class="hidden space-x-4 md:flex">
+            <a href="#" class="text-red-500 hover:text-gray-700">Why Donate?</a>
+            <a href="#" class="text-red-500 hover:text-gray-700">Contact Us</a>
+            <a href="/login" class="text-red-500 hover:text-gray-700">Login</a>
+            <a href="/signUp" class="text-red-500 hover:text-gray-700">Sign Up</a>
+        </nav>
+
+        <!-- Mobile Menu -->
+        <nav id="mobile-menu" class="fixed top-0 right-0 w-3/4 h-full bg-red-500 text-white shadow-lg p-6 space-y-6 hidden">
+            <button id="close-btn" class="absolute top-4 right-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="#" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Why Donate?</a>
+            <a href="#" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Contact Us</a>
+            <a href="login.html" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Login</a>
+            <a href="signUp.html" class="block text-white hover:bg-white hover:text-red-500 rounded-lg px-4 py-2">Sign Up</a>
+        </nav>
+    </div>
+</header>
+
+
+  <!-- Main Content Section -->
+  <main class="pt-5 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+    
+    <!-- Main Content Container (Sign-Up Form) -->
+    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md mx-auto">
+      <h2 class="text-center text-3xl font-extrabold text-gray-900">Sign Up to Donate</h2>
+
+        <form action="#" th:action="@{/signUp}" th:object="${user}" method="post" class="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+            <h2 class="text-2xl font-bold text-center text-gray-900">Sign Up</h2>
+
+            <!-- Username -->
+            <div class="space-y-1">
+                <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                <input id="username" name="username" type="text" th:field="*{username}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your username">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            </div>
+
+            <!-- Email -->
+            <div class="space-y-1">
+                <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                <input id="email" name="email" type="email" th:field="*{email}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your email">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            </div>
+
+            <!-- Mobile Number -->
+            <div class="space-y-1">
+                <label for="number" class="block text-sm font-medium text-gray-700">Mobile Number</label>
+                <input id="number" name="number" type="tel" th:field="*{number}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your mobile number">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></p>
+            </div>
+
+            <!-- Blood Type -->
+            <div class="space-y-1">
+                <label for="bloodType" class="block text-sm font-medium text-gray-700">Blood Type</label>
+                <select id="bloodType" name="bloodType" th:field="*{bloodType}"
+                        class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                    <option value="" disabled selected>Select your blood type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('bloodType')}" th:errors="*{bloodType}"></p>
+            </div>
+
+            <!-- Location -->
+            <div class="space-y-1">
+                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                <input id="location" name="location" type="text" th:field="*{location}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="City or State">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></p>
+            </div>
+
+            <!-- Password -->
+            <div class="space-y-1">
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input id="password" name="password" type="password" th:field="*{password}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your password">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="space-y-1">
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                <input id="confirmPassword" name="confirmPassword" type="password" th:field="*{confirmPassword}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Re-enter your password">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="w-full py-2 px-4 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Sign Up
+            </button>
+        </form>
+
+
+
+
+        <!-- Link to Login Page -->
+      <div class="text-center">
+        <p class="text-sm text-gray-600">Already have an account? 
+          <a href="/login" class="font-medium text-indigo-600 hover:text-indigo-500">Login here</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="bg-gray-900 text-white p-4">
+    <div class="max-w-7xl mx-auto text-center">
+      <p>&copy; 2024 Blood Donation Project. All rights reserved.</p>
+      <p><a href="#" class="underline hover:text-gray-300">Privacy Policy</a> | <a href="#" class="underline hover:text-gray-300">Terms of Service</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>

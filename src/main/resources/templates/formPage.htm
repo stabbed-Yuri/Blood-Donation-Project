@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blood Request Form</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+
+
+    <!-- Header Section -->
+  <!-- Navbar Section -->
+  <header class="bg-white shadow-md">
+    <div class="flex items-center justify-between p-4">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+        <a href="homePage.html">
+            <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
+        </a>
+      </div>
+      
+      
+      <!-- Hamburger Icon for Small Devices -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-red-500 focus:outline-none">
+          <!-- Hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5h16.5M3.75 12h16.5m-16.5 4.5h16.5" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Links for Desktop -->
+      <nav class="hidden space-x-4 md:flex">
+        <!-- <a href="#" class="text-red-500 hover:text-gray-200">About Us</a> -->
+        <a href="#" class="text-red-500 hover:text-gray-200">Why Donate?</a>
+        <a href="#" class="text-red-500 hover:text-gray-200">Contact Us</a>
+        <a href="login.html" class="text-red-500 hover:text-gray-200">Login</a>
+        <a href="signUp.html" class="text-red-500 hover:text-gray-200">Sign Up</a>
+      </nav>
+
+      <!-- Links for Mobile -->
+      <nav id="mobile-menu" class="fixed top-0 right-0 w-3/4 h-3/4 bg-red-500 shadow-lg p-6 space-y-6 hidden md:hidden">
+  <!-- Close button for mobile menu -->
+  <button id="close-btn" class="absolute top-4 right-4 text-white focus:outline-none">
+    <!-- Close icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    </svg>
+  </button>
+
+  <!-- Menu links with rounded white background on hover -->
+  <a href="#" class="block text-white hover:text-red-500 hover:bg-white hover:rounded-lg px-4 py-2">Why Donate?</a>
+  <a href="#" class="block text-white hover:text-red-500 hover:bg-white hover:rounded-lg px-4 py-2">Contact Us</a>
+  <a href="login.html" class="block text-white hover:text-red-500 hover:bg-white hover:rounded-lg px-4 py-2">Login</a>
+  <a href="signUp.html" class="block text-white hover:text-red-500 hover:bg-white hover:rounded-lg px-4 py-2">Sign Up</a>
+</nav>
+
+    </div>
+  </header>
+
+  <main>
+    <div class="flex items-center justify-center min-h-screen p-8">
+        <form class="w-full max-w-4xl p-8 bg-white shadow-xl">
+            <h2 class="text-3xl font-semibold text-red-600 mb-6 text-center">Request Blood Donation</h2>
+    
+            <!-- Blood Type -->
+            <div class="mb-5">
+                <label for="bloodType" class="block text-sm font-medium text-red-700 mb-2">Blood Type</label>
+                <select id="bloodType" name="bloodType" class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="" disabled selected>Select Blood Type</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+            </div>
+    
+            <!-- Location -->
+            <div class="mb-5">
+                <label for="location" class="block text-sm font-medium text-red-700 mb-2">Location</label>
+                <input type="text" id="location" name="location" placeholder="City, State, or Postal Code"
+                    class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+    
+            <!-- Urgency Level -->
+            <div class="mb-5">
+                <label for="urgency" class="block text-sm font-medium text-red-700 mb-2">Urgency Level</label>
+                <select id="urgency" name="urgency" class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="" disabled selected>Select Urgency Level</option>
+                    <option value="high">High</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+    
+            <!-- Preferred Donation Type -->
+            <div class="mb-5">
+                <label for="donationType" class="block text-sm font-medium text-red-700 mb-2">Preferred Donation Type</label>
+                <select id="donationType" name="donationType" class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+                    <option value="" disabled selected>Select Donation Type</option>
+                    <option value="wholeBlood">Whole Blood</option>
+                    <option value="platelets">Platelets</option>
+                    <option value="plasma">Plasma</option>
+                </select>
+            </div>
+    
+            <!-- Donation Date -->
+            <div class="mb-5">
+                <label for="donationDate" class="block text-sm font-medium text-red-700 mb-2">Donation Date</label>
+                <input type="date" id="donationDate" name="donationDate"
+                    class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+    
+            <!-- Donation Time -->
+            <div class="mb-5">
+                <label for="donationTime" class="block text-sm font-medium text-red-700 mb-2">Preferred Donation Time</label>
+                <input type="time" id="donationTime" name="donationTime"
+                    class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+    
+            <!-- Operation Time (Optional) -->
+            <div class="mb-5">
+                <label for="operationTime" class="block text-sm font-medium text-red-700 mb-2">Operation Time (If Applicable)</label>
+                <input type="time" id="operationTime" name="operationTime"
+                    class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+    
+            <!-- Additional Message -->
+            <div class="mb-5">
+                <label for="message" class="block text-sm font-medium text-red-700 mb-2">Additional Message (Optional)</label>
+                <textarea id="message" name="message" rows="4" placeholder="Enter any additional information here..."
+                    class="w-full p-3 border border-red-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+            </div>
+    
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" class="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500">
+                    Submit Request
+                </button>
+            </div>
+        </form>
+    </div>
+    
+  </main>
+</body>
+</html>

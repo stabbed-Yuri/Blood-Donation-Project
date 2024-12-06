@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blood Donation Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gray-100">
+
+  <!-- Header Section -->
+  <!-- Navbar Section -->
+  <header class="relative bg-white shadow-md z-10">
+    <div class="flex items-center justify-between p-4">
+      <a href="/homePage" class="flex items-center gap-2">
+        <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+        <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
+      </a>
+
+      <!-- Hamburger Icon for Small Devices -->
+      <div class="md:hidden">
+        <button id="menu-btn" class="text-red-500 focus:outline-none">
+          <!-- Hamburger icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5h16.5M3.75 12h16.5m-16.5 4.5h16.5" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Desktop Navigation -->
+      <nav class="md:flex space-x-8">
+        <a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>
+        <a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>
+        <a href="/request" class="text-red-500 hover:text-xl">Request</a>
+        <a href="/donate" class="text-red-500 hover:text-xl">Donate</a>
+
+        <!-- Display Login and Sign-Up if user is not logged in -->
+        <a href="/login" class="text-red-500 hover:text-xl" th:if="${principal == null}">Login</a>
+        <a href="/signUp" class="text-red-500 hover:text-xl" th:if="${principal == null}">Sign Up</a>
+
+        <!-- Display Profile and Logout if user is logged in -->
+        <a href="/profile" class="text-red-500 hover:text-xl" th:if="${principal != null}">Profile</a>
+        <a href="/logout" class="text-red-500 hover:text-xl" th:if="${principal != null}">Logout</a>
+        <span th:if="${#authentication != null}" class="text-white">Welcome, <span th:text="${username}"></span></span>
+      </nav>
+
+
+
+    </div>
+    <!-- Greeting Message Section -->
+    <section class="relative h-[400px] md:h-[500px] bg-cover bg-center shadow-lg" style="background-image: url('/images/HomePage/woman-mask-uniform-holding-tube-her-hands.jpg');">
+      <!-- Transparent Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-40"></div>
+      <!-- Content -->
+      <div class="relative flex flex-col justify-center h-full px-10 py-5">
+        <h2 class="text-2xl md:text-4xl lg:text-6xl font-bold text-white">
+          <span>Save Lives</span> <br><span>Donate Blood</span>
+        </h2>
+        <div>
+          <p class="text-sm md:text-lg text-gray-100 mb-4">Join us in saving lives by Donating Blood.</p>
+          <a href="signUp.html">
+            <button class="bg-red-600 text-sm md:text-base text-white py-2 px-4 rounded-lg hover:bg-white hover:text-red-500 transition duration-300">
+              DONATE
+            </button>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="relative h-[400px] md:h-[500px] bg-cover bg-center shadow-lg" style="background-image: url('/images/HomePage/patient-getting-chemotherapy-treatment.jpg');">
+      <!-- Transparent Overlay -->
+      <div class="absolute inset-0 bg-black bg-opacity-30"></div>
+      <!-- Content -->
+      <div class="flex flex-row justify-end h-full">
+        <div class="relative flex flex-col justify-center h-full px-10 py-5">
+        <h2 class="flex flex-col items-end text-2xl md:text-4xl lg:text-6xl font-bold text-white">
+          <span>Save Lives</span>
+          <span>Donate Blood</span>
+        </h2>
+        <div class="flex flex-col items-end">
+          <p class="text-sm md:text-lg text-gray-100 mb-4">Join us in saving lives by Donating Blood.</p>
+          <a href="formPage.htm">
+            <button class="bg-red-600 text-sm md:text-base text-white py-2 px-4 rounded-lg hover:bg-white hover:text-red-600 transition duration-300">
+              REQUEST
+            </button>
+          </a>
+        </div>
+      </div>
+      </div>
+    </section>
+  </header>
+
+
+  <!-- Main Content Section -->
+  <main class="pt-10 pb-10 px-4 sm:px-6 lg:px-8">
+    
+    
+
+    <!-- Section 1: Statistics Overview -->
+    <section class="bg-gray-100 mb-10">
+      <h3 class="text-center text-3xl font-bold mb-6">Our Impact</h3>
+      <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
+        
+        <!-- Donors Box -->
+        <div class="bg-red-600 text-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-user-plus fa-2x"></i>
+          <h4 class="text-3xl font-bold mt-2">1,250</h4>
+          <p class="mt-2">Donors Registered</p>
+        </div>
+        
+        <!-- Helped Patients Box -->
+        <div class="bg-green-500 text-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-heart fa-2x"></i>
+          <h4 class="text-3xl font-bold mt-2">3,500</h4>
+          <p class="mt-2">Patients Helped</p>
+        </div>
+        
+        <!-- Connected Organizations Box -->
+        <div class="bg-blue-500 text-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-users fa-2x"></i>
+          <h4 class="text-3xl font-bold mt-2">150</h4>
+          <p class="mt-2">Organizations Connected</p>
+        </div>
+        
+        <!-- Hospitals Box -->
+        <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-hospital fa-2x"></i>
+          <h4 class="text-3xl font-bold mt-2">75</h4>
+          <p class="mt-2">Hospitals Partnered</p>
+        </div>
+        
+      </div>
+    </section>
+
+
+    <!-- Section 2: Button Grid -->
+    <section class="mb-10">
+      <h3 class="text-center text-3xl font-bold p-6">What Would You Like to Do?</h3>
+      <div class="grid grid-cols-2 gap-4 h-64 mt-6">
+        <!-- Button 1 -->
+        <a href="formPage.htm" class="bg-white rounded-lg p-4 text-center shadow-md text-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center">
+          <h4 class="text-lg font-semibold">Need Blood?</h4>
+        </a>
+        <!-- Button 2 -->
+        <a href="donorListPage.htm" class="bg-white rounded-lg p-4 text-center shadow-md text-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center">
+          <h4 class="text-lg font-semibold">Donor List</h4>
+        </a>
+        <!-- Button 3 -->
+        <a href="#" class="bg-white rounded-lg p-4 text-center shadow-md text-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center">
+          <h4 class="text-lg font-semibold">Donate Blood from the List</h4>
+        </a>
+        <!-- Button 4 -->
+        <a href="#" class="bg-white rounded-lg p-4 text-center shadow-md text-red-600 hover:bg-red-600 hover:text-white flex items-center justify-center">
+          <h4 class="text-lg font-semibold">Organization List</h4>
+        </a>
+      </div>
+    </section>
+
+
+    <!-- Section 3 : recent donor Registered -->
+    <section class="text-center mb-10">
+      <div class="text-center p-6">
+        <h1 class="text-3xl font-bold">Recently Requested for Blood</h1>
+      </div>
+  
+      <!-- Donor Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
+  
+        <!-- Donor Card 1 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-600">
+            <div>
+              <h2 class="text-lg font-bold">Tipu Sultan Eiko</h2>
+              <!-- <p class="text-red-600">Blood Group: B+</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div>
+  
+        <!-- Donor Card 2 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
+            <div>
+              <h2 class="text-lg font-bold">Muhammad Taqi Tahmid Khan</h2>
+              <!-- <p class="text-red-500">Blood Group: B+</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div>
+  
+        <!-- Donor Card 3 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
+            <div>
+              <h2 class="text-lg font-bold">Aisha Rahman</h2>
+              <!-- <p class="text-red-500">Blood Group: A-</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div>
+  
+        <!-- Donor Card 4 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
+            <div>
+              <h2 class="text-lg font-bold">Ahmed Karim</h2>
+              <!-- <p class="text-red-500">Blood Group: O+</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div>
+
+
+        <!-- Donor Card 5 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
+            <div>
+              <h2 class="text-lg font-bold">Aisha Rahman</h2>
+              <!-- <p class="text-red-500">Blood Group: A-</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
+            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div>
+
+        <!-- Donor Card 6 -->
+        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+          <div class="flex items-center space-x-4">
+            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
+            <div>
+              <h2 class="text-lg font-bold">Aisha Rahman</h2>
+              <!-- <p class="text-red-500">Blood Group: A-</p> -->
+            </div>
+          </div>
+          <div class="mt-4 text-gray-700 space-y-2 text-left">
+            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
+            <p><span class="font-bold">Blood Type:</span> A+</p>
+            <p><span class="font-bold">Amount Required:</span> 2</p>
+            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+          </div>
+          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
+            </svg>
+            Call Now
+          </button>
+        </div> 
+        </div>
+      </section>
+
+    <!-- Section 4 : How It Works Section -->
+  <section class="py-10">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold text-center mb-6">How It Works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <h3 class="text-xl font-semibold text-red-600">1. Register</h3>
+          <p>Sign up as a donor and help save lives.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <h3 class="text-xl font-semibold text-red-600">2. Search & Request</h3>
+          <p>Search for donors or request blood easily.</p>
+        </div>
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <h3 class="text-xl font-semibold text-red-600">3. Donate & Save Lives</h3>
+          <p>Make a donation and become a hero.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- Section 5 : Why Donate Blood Section -->
+  <section class="bg-red-600 text-white py-16 mt-8">
+    <div class="container mx-auto text-center">
+      <h2 class="text-2xl font-bold mb-4">Why Donate Blood?</h2>
+      <p class="mb-6">Every donation can save up to three lives. Blood is always in demand, and your contribution can make a big impact.</p>
+      <a href="#" class="bg-white text-red-600 font-semibold py-2 px-6 rounded-lg hover:bg-red-700 hover:text-white transition">Learn More</a>
+    </div>
+  </section>
+
+
+    <!-- Section 6 : Partner Hospitals Section -->
+  <section class="bg-white py-10">
+    <div class="container mx-auto">
+      <h2 class="text-2xl text-red-600 font-bold text-center mb-6">Our Partner Hospitals</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Hospital 1 -->
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <img src="/images/HomePage/Hospital.jpg" alt="Hospital 1" class="mx-auto mb-4 w-36 h-24">
+          <h3 class="text-lg font-semibold">City Hospital</h3>
+        </div>
+        <!-- Hospital 2 -->
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <img src="/images/HomePage/Hospital.jpg" alt="Hospital 2" class="mx-auto mb-4 w-36 h-24">
+          <h3 class="text-lg font-semibold">HealthCare Clinic</h3>
+        </div>
+        <!-- Hospital 3 -->
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <img src="/images/HomePage/Hospital.jpg" alt="Hospital 3" class="mx-auto mb-4 w-36 h-24">
+          <h3 class="text-lg font-semibold">General Hospital</h3>
+        </div>
+        <!-- Hospital 4 -->
+        <div class="p-6 bg-gray-100 rounded-lg shadow-md text-center">
+          <img src="/images/HomePage/Hospital.jpg" alt="Hospital 4" class="mx-auto mb-4 w-36 h-24">
+          <h3 class="text-lg font-semibold">MedLife Hospital</h3>
+        </div>
+      </div>
+      <div class="mt-8 text-center">
+        <a href="#" class="inline-block bg-red-600 text-white py-2 px-6 rounded-lg hover:bg-red-700 transition">Show More</a>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- Footer Section -->
+<footer class="bg-gray-900 text-white p-8 shadow-lg">
+  <div class="max-w-7xl mx-auto">
+
+    <!-- Review Section -->
+    <div class="mb-8">
+      <h3 class="text-lg font-bold mb-2">Leave a Review</h3>
+      <form class="space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full p-2 rounded-md border border-gray-300">
+        <textarea placeholder="Your Message" class="w-full p-2 rounded-md border border-gray-300" rows="4"></textarea>
+        <button type="submit" class="bg-red-600 text-white rounded-md px-4 py-2 hover:bg-red-700 transition">Submit</button>
+      </form>
+    </div>
+
+    <!-- Contact Us Section -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-bold mb-2">Contact Us</h2>
+      <p>If you have any questions or need assistance, feel free to reach out.</p>
+      <a href="#" class="mt-4 inline-block bg-red-600 text-white py-2 px-6 rounded-lg hover:bg-red-700 transition">Get in Touch</a>
+    </div>
+
+    <!-- Copyright Section -->
+    <div class="text-center">
+      <p>&copy; 2024 Blood Donation Project. All rights reserved.</p>
+      <p>
+        <a href="demo.htm" class="underline hover:text-gray-300">Privacy Policy</a> |
+        <a href="#" class="underline hover:text-gray-300">Terms of Service</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+
+
+
+
+
+  <!-- JavaScript for toggling mobile menu -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.remove('hidden'); // Show menu
+    });
+
+    closeBtn.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden'); // Hide menu
+    });
+
+  </script>
+
+</body>
+</html>
