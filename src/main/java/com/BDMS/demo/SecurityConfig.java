@@ -51,9 +51,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authz -> authz
                         // Allow access to public URLs (login, signup, home page, H2 console, and static resources)
-                        .requestMatchers("/login", "/signUp", "/homePage", "/h2-console/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/login", "/logout", "/signUp", "/homePage", "/h2-console/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
                         // Require authentication for profile, logout, etc.
-                        .requestMatchers("/profile", "/logout").authenticated()
+                        .requestMatchers("/profile").authenticated()
                         // Protect all other URLs requiring authentication
                         .anyRequest().authenticated()
                 )
@@ -65,15 +65,17 @@ public class SecurityConfig {
                         .failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error=true"))  // Custom failure handler
                 )
                 .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                        .logoutUrl("/logout") // Match your logout URL
+                        .logoutSuccessUrl("/homePage") // Redirect here after successful logout
+                        .invalidateHttpSession(true) // Invalidate session on logout
+                        .deleteCookies("JSESSIONID") // Clear session cookies
                         .permitAll()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**") // Disable CSRF only for H2 console
+                        .ignoringRequestMatchers("/h2-console/**", "/logout", "/static/**", "/css/**", "/js/**", "/images/**") // Disable CSRF only for H2 console
                 )
                 .headers(headers -> headers
                         .frameOptions().sameOrigin() // Allow H2 console in a frame

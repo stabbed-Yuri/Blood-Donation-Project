@@ -16,7 +16,7 @@
   $(document).ready(function() {
     // Perform AJAX request to check the login status
     $.ajax({
-      url: '/getUserStatus', // The backend endpoint created above
+      url: '/getUserStatus', // The backend endpoint created above to check login status
       type: 'GET',
       success: function(response) {
         let navbarHtml = '';
@@ -30,7 +30,7 @@
         // Dynamic links based on login status
         if (response.loggedIn) {
           navbarHtml += `<a href="/profile" class="text-red-500 hover:text-xl">Profile (${response.username})</a>`;
-          navbarHtml += '<a href="/logout" class="text-red-500 hover:text-xl">Logout</a>';
+          navbarHtml += '<a href="#" id="logout-btn" class="text-red-500 hover:text-xl">Logout</a>';  // Logout link triggers AJAX logout
         } else {
           navbarHtml += '<a href="/login" class="text-red-500 hover:text-xl">Login</a>';
           navbarHtml += '<a href="/signUp" class="text-red-500 hover:text-xl">Sign Up</a>';
@@ -38,6 +38,24 @@
 
         // Update the navbar with the new links based on login status
         $('#navbar').html(navbarHtml);  // Inject the updated HTML into the navbar
+
+        // Handle the logout click event
+        $('#logout-btn').on('click', function(e) {
+          e.preventDefault();  // Prevent the default link behavior (page navigation)
+
+          // Make the POST request to log out
+          $.ajax({
+            url: '/logout',  // This is your Spring Security's logout URL
+            type: 'POST',
+            success: function() {
+              // Redirect to the home page (or another page) after successful logout
+              window.location.href = '/homePage';  // Change this to where you want to redirect the user
+            },
+            error: function() {
+              console.error('Logout failed');
+            }
+          });
+        });
       },
       error: function() {
         console.error('Error fetching user status');

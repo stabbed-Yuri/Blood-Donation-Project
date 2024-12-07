@@ -47,6 +47,6 @@ public class UserController {
 
         // Save the user to the database
 
-        return "/signUp"; // Redirect to login page after successful sign-up
+        return "/login"; // Redirect to login page after successful sign-up
     }
 }

@@ -20,8 +20,5 @@ public class HomeController {
         return "homePage"; // Render homepage
     }
 
-    @GetMapping("/logout")
-    public String logout() {
-        return "redirect:/login?logout"; // Redirect to login after logout
-    }
+
 }
