@@ -1,24 +1,49 @@
-<nav class="md:flex space-x-8">
-  <!-- Link: Why Donate -->
-  <a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>
-
-  <!-- Link: Contact Us -->
-  <a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>
-
-  <!-- Link: Request -->
-  <a href="/request" class="text-red-500 hover:text-xl">Request</a>
-
-  <!-- Link: Donate -->
-  <a href="/donate" class="text-red-500 hover:text-xl">Donate</a>
-
-  <!-- Display Login and Sign-Up if user is not logged in -->
-  <a href="/login" class="text-red-500 hover:text-xl" th:if="${#authentication == null}">Login</a>
-  <a href="/signUp" class="text-red-500 hover:text-xl" th:if="${#authentication == null}">Sign Up</a>
-
-  <!-- Display Profile and Logout if user is logged in -->
-  <a href="/profile" class="text-red-500 hover:text-xl" th:if="${#authentication != null}">Profile</a>
-  <a href="/logout" class="text-red-500 hover:text-xl" th:if="${#authentication != null}">Logout</a>
-
-  <!-- Optionally, display a welcome message if user is logged in -->
-  <span th:if="${#authentication != null}" class="text-white">Welcome, <span th:text="${#authentication.name}"></span>!</span>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery CDN -->
+</head>
+<body>
+<!-- The Navbar -->
+<nav id="navbar" class="md:flex space-x-8">
+  <!-- Links will be dynamically injected here by JavaScript -->
 </nav>
+
+<script>
+  $(document).ready(function() {
+    // Perform AJAX request to check the login status
+    $.ajax({
+      url: '/getUserStatus', // The backend endpoint created above
+      type: 'GET',
+      success: function(response) {
+        let navbarHtml = '';
+
+        // Common links for all users (these links are displayed to everyone)
+        navbarHtml += '<a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>';
+        navbarHtml += '<a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>';
+        navbarHtml += '<a href="/request" class="text-red-500 hover:text-xl">Request</a>';
+        navbarHtml += '<a href="/donate" class="text-red-500 hover:text-xl">Donate</a>';
+
+        // Dynamic links based on login status
+        if (response.loggedIn) {
+          navbarHtml += `<a href="/profile" class="text-red-500 hover:text-xl">Profile (${response.username})</a>`;
+          navbarHtml += '<a href="/logout" class="text-red-500 hover:text-xl">Logout</a>';
+        } else {
+          navbarHtml += '<a href="/login" class="text-red-500 hover:text-xl">Login</a>';
+          navbarHtml += '<a href="/signUp" class="text-red-500 hover:text-xl">Sign Up</a>';
+        }
+
+        // Update the navbar with the new links based on login status
+        $('#navbar').html(navbarHtml);  // Inject the updated HTML into the navbar
+      },
+      error: function() {
+        console.error('Error fetching user status');
+      }
+    });
+  });
+</script>
+</body>
+</html>
