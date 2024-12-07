@@ -17,23 +17,9 @@
             <h1 class="text-xl md:text-2xl font-bold text-red-500">BDMS Project</h1>
         </a>
       
-        <!-- Hamburger Icon for Small Devices -->
-        <div class="md:hidden">
-            <button id="menu-btn" class="text-red-500 focus:outline-none">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5h16.5M3.75 12h16.5m-16.5 4.5h16.5" />
-                </svg>
-            </button>
-        </div>
 
         <!-- Links for Desktop -->
-        <nav class="hidden space-x-4 md:flex">
-            <a href="#" class="text-red-500 hover:text-gray-700">Why Donate?</a>
-            <a href="#" class="text-red-500 hover:text-gray-700">Contact Us</a>
-            <a href="/login" class="text-red-500 hover:text-gray-700">Login</a>
-            <a href="/signUp" class="text-red-500 hover:text-gray-700">Sign Up</a>
-        </nav>
-
+        <div th:replace="~{navbar.html}"></div>
         <!-- Mobile Menu -->
 
     </div>

@@ -1,0 +1,24 @@
+<nav class="md:flex space-x-8">
+  <!-- Link: Why Donate -->
+  <a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>
+
+  <!-- Link: Contact Us -->
+  <a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>
+
+  <!-- Link: Request -->
+  <a href="/request" class="text-red-500 hover:text-xl">Request</a>
+
+  <!-- Link: Donate -->
+  <a href="/donate" class="text-red-500 hover:text-xl">Donate</a>
+
+  <!-- Display Login and Sign-Up if user is not logged in -->
+  <a href="/login" class="text-red-500 hover:text-xl" th:if="${#authentication == null}">Login</a>
+  <a href="/signUp" class="text-red-500 hover:text-xl" th:if="${#authentication == null}">Sign Up</a>
+
+  <!-- Display Profile and Logout if user is logged in -->
+  <a href="/profile" class="text-red-500 hover:text-xl" th:if="${#authentication != null}">Profile</a>
+  <a href="/logout" class="text-red-500 hover:text-xl" th:if="${#authentication != null}">Logout</a>
+
+  <!-- Optionally, display a welcome message if user is logged in -->
+  <span th:if="${#authentication != null}" class="text-white">Welcome, <span th:text="${#authentication.name}"></span>!</span>
+</nav>

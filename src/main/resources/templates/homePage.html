@@ -18,32 +18,9 @@
         <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
       </a>
 
-      <!-- Hamburger Icon for Small Devices -->
-      <div class="md:hidden">
-        <button id="menu-btn" class="text-red-500 focus:outline-none">
-          <!-- Hamburger icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 7.5h16.5M3.75 12h16.5m-16.5 4.5h16.5" />
-          </svg>
-        </button>
-      </div>
 
       <!-- Desktop Navigation -->
-      <nav class="md:flex space-x-8">
-        <a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>
-        <a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>
-        <a href="/request" class="text-red-500 hover:text-xl">Request</a>
-        <a href="/donate" class="text-red-500 hover:text-xl">Donate</a>
-
-        <!-- Display Login and Sign-Up if user is not logged in -->
-        <a href="/login" class="text-red-500 hover:text-xl" th:if="${principal == null}">Login</a>
-        <a href="/signUp" class="text-red-500 hover:text-xl" th:if="${principal == null}">Sign Up</a>
-
-        <!-- Display Profile and Logout if user is logged in -->
-        <a href="/profile" class="text-red-500 hover:text-xl" th:if="${principal != null}">Profile</a>
-        <a href="/logout" class="text-red-500 hover:text-xl" th:if="${principal != null}">Logout</a>
-        <span th:if="${#authentication != null}" class="text-white">Welcome, <span th:text="${username}"></span></span>
-      </nav>
+      <div th:replace="~{navbar.html}"></div>
 
 
 
@@ -96,42 +73,42 @@
 
   <!-- Main Content Section -->
   <main class="pt-10 pb-10 px-4 sm:px-6 lg:px-8">
-    
-    
+
+
 
     <!-- Section 1: Statistics Overview -->
     <section class="bg-gray-100 mb-10">
       <h3 class="text-center text-3xl font-bold mb-6">Our Impact</h3>
       <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-4">
-        
+
         <!-- Donors Box -->
         <div class="bg-red-600 text-white p-6 rounded-lg shadow-md text-center">
           <i class="fas fa-user-plus fa-2x"></i>
           <h4 class="text-3xl font-bold mt-2">1,250</h4>
           <p class="mt-2">Donors Registered</p>
         </div>
-        
+
         <!-- Helped Patients Box -->
         <div class="bg-green-500 text-white p-6 rounded-lg shadow-md text-center">
           <i class="fas fa-heart fa-2x"></i>
           <h4 class="text-3xl font-bold mt-2">3,500</h4>
           <p class="mt-2">Patients Helped</p>
         </div>
-        
+
         <!-- Connected Organizations Box -->
         <div class="bg-blue-500 text-white p-6 rounded-lg shadow-md text-center">
           <i class="fas fa-users fa-2x"></i>
           <h4 class="text-3xl font-bold mt-2">150</h4>
           <p class="mt-2">Organizations Connected</p>
         </div>
-        
+
         <!-- Hospitals Box -->
         <div class="bg-yellow-500 text-white p-6 rounded-lg shadow-md text-center">
           <i class="fas fa-hospital fa-2x"></i>
           <h4 class="text-3xl font-bold mt-2">75</h4>
           <p class="mt-2">Hospitals Partnered</p>
         </div>
-        
+
       </div>
     </section>
 
@@ -165,10 +142,10 @@
       <div class="text-center p-6">
         <h1 class="text-3xl font-bold">Recently Requested for Blood</h1>
       </div>
-  
+
       <!-- Donor Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
-  
+
         <!-- Donor Card 1 -->
         <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
           <div class="flex items-center space-x-4">
@@ -183,7 +160,7 @@
             <p><span class="font-bold">Blood Type:</span> A+</p>
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -192,7 +169,7 @@
             Call Now
           </button>
         </div>
-  
+
         <!-- Donor Card 2 -->
         <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
           <div class="flex items-center space-x-4">
@@ -207,7 +184,7 @@
             <p><span class="font-bold">Blood Type:</span> A+</p>
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -216,7 +193,7 @@
             Call Now
           </button>
         </div>
-  
+
         <!-- Donor Card 3 -->
         <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
           <div class="flex items-center space-x-4">
@@ -231,7 +208,7 @@
             <p><span class="font-bold">Blood Type:</span> A+</p>
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -240,7 +217,7 @@
             Call Now
           </button>
         </div>
-  
+
         <!-- Donor Card 4 -->
         <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
           <div class="flex items-center space-x-4">
@@ -255,7 +232,7 @@
             <p><span class="font-bold">Blood Type:</span> A+</p>
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -281,7 +258,7 @@
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
             <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-            
+
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -305,7 +282,7 @@
             <p><span class="font-bold">Blood Type:</span> A+</p>
             <p><span class="font-bold">Amount Required:</span> 2</p>
             <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>            
+            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -313,7 +290,7 @@
             </svg>
             Call Now
           </button>
-        </div> 
+        </div>
         </div>
       </section>
 

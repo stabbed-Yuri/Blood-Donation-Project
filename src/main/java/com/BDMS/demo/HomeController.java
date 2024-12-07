@@ -13,10 +13,15 @@ public class HomeController {
 
     @GetMapping("/homePage")
     public String homePage(Model model, Principal principal) {
+        // Check if user is logged in (principal will be null if not logged in)
         if (principal != null) {
-            String username = principal.getName();  // The authenticated user's email/username
-            model.addAttribute("username", username);
+            model.addAttribute("loggedInUser", principal.getName()); // Pass the username or other details
         }
-        return "/homePage"; // Replace with your actual home page view
+        return "homePage"; // Render homepage
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login?logout"; // Redirect to login after logout
     }
 }

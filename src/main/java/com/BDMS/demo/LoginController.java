@@ -54,19 +54,7 @@ public class LoginController {
     }
 
 
-    @GetMapping("/home")
-    public String showHomePage(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login"; // If no user, redirect to login page
-        }
-        model.addAttribute("user", user);
-        return "homePage"; // Show the home page
-    }
 
-    @GetMapping("/logout")
-    public String handleLogout(HttpSession session) {
-        session.invalidate(); // Invalidate the session
-        return "redirect:/login"; // Redirect to login page after logout
-    }
+
+
 }
