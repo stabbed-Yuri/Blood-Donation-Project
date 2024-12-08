@@ -9,6 +9,8 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -57,12 +59,14 @@ public class SecurityConfig {
                         // Protect all other URLs requiring authentication
                         .anyRequest().authenticated()
                 )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .usernameParameter("username") // Change to "username" to accommodate login with username
-                        .permitAll()
-                        .defaultSuccessUrl("/homePage", true) // Redirect to home page after login
-                        .failureHandler(new SimpleUrlAuthenticationFailureHandler("/login?error=true"))  // Custom failure handler
+                .formLogin(httpSecurityFormLoginConfigurer->{
+                    httpSecurityFormLoginConfigurer
+                            .loginPage("/login")
+                            .defaultSuccessUrl("/homePage", true)
+                            ;
+
+                        }
+                        // Custom failure handler
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout") // Match your logout URL
@@ -74,9 +78,8 @@ public class SecurityConfig {
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 )
-                .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**", "/logout", "/static/**", "/css/**", "/js/**", "/images/**") // Disable CSRF only for H2 console
-                )
+                .csrf(AbstractHttpConfigurer::disable)// Disable CSRF only for H2 console
+
                 .headers(headers -> headers
                         .frameOptions().sameOrigin() // Allow H2 console in a frame
                 );

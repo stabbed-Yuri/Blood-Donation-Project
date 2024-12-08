@@ -22,10 +22,10 @@
         let navbarHtml = '';
 
         // Common links for all users (these links are displayed to everyone)
-        navbarHtml += '<a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Why Donate?</a>';
-        navbarHtml += '<a href="/aboutUs" class="text-red-500 hover:text-xl">Contact Us</a>';
-        navbarHtml += '<a href="/request" class="text-red-500 hover:text-xl">Request</a>';
-        navbarHtml += '<a href="/donate" class="text-red-500 hover:text-xl">Donate</a>';
+        navbarHtml += '<a href="https://professionaleducation.blood.ca/en/transfusion/publications/paying-it-forward-why-we-need-you-give-blood" class="text-red-500 hover:text-xl">Why Donate?</a>';
+        navbarHtml += '<a href="aboutUsPage.htm" class="text-red-500 hover:text-xl">Contact Us</a>';
+        navbarHtml += '<a href="donorTablePage.htm" class="text-red-500 hover:text-xl">Request</a>';
+        navbarHtml += '<a href="formPage.htm" class="text-red-500 hover:text-xl">Donate</a>';
 
         // Dynamic links based on login status
         if (response.loggedIn) {
