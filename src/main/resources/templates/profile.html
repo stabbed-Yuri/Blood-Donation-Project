@@ -11,170 +11,126 @@
 </head>
 <body class="bg-gray-100">
 
-  <!-- Header -->
-  <header class=" relative bg-white shadow-md z-10">
-    <div class="flex items-center justify-between p-4">
-      <a href="/homePage" class="flex items-center gap-2">
-        <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
-        <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
-      </a>
+<!-- Header -->
+<header class="relative bg-white shadow-md z-10">
+  <div class="flex items-center justify-between p-4">
+    <a href="/homePage" class="flex items-center gap-2">
+      <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+      <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
+    </a>
 
+    <div th:replace="~{navbar.html}"></div>
 
-      <div th:replace="~{navbar.html}"></div>
+    <!-- Menu links with rounded white background on hover -->
+    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Edit_Profile</a>
+    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Donate</a>
+    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Request</a>
+    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Contact Us</a>
+    <a href="login.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Login</a>
+    <a href="signUp.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Sign Up</a>
+  </div>
+</header>
 
-  <!-- Menu links with rounded white background on hover -->
-  <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Edit_Profile</a>
-  <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Donate</a>
-  <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Request</a>
-  <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Contact Us</a>
-  <a href="login.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Login</a>
-  <a href="signUp.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Sign Up</a>
+<!-- Main Content -->
+<main class="container mx-auto mt-6">
 
+  <!-- Profile Header -->
+  <section class="relative p-6 text-center mb-6">
+    <div class="relative inline-block">
+      <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile" class="mx-auto rounded-full w-48 shadow-lg">
 
-    </div>
-  </header>
+      <!-- Hidden File Input -->
+      <input type="file" id="fileInput" accept="image/*" class="hidden" />
 
-  <!-- Main Content -->
-  <main class="container mx-auto mt-6">
-
-    <!-- Profile Header -->
-    <section class="relative p-6 text-center mb-6">
-        <div class="relative inline-block">
-          <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile" class="mx-auto rounded-full w-48 shadow-lg">
-
-          <!-- Hidden File Input -->
-          <input type="file" id="fileInput" accept="image/*" class="hidden" />
-
-          <!-- Change Photo Button -->
-          <button id="changePhotoButton" class="absolute bottom-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25h2.655a1 1 0 00.897-.553L7.618 6h8.764l1.066 1.697a1 1 0 00.897.553H21M3 8.25v9.5a2 2 0 002 2h14a2 2 0 002-2v-9.5M3 8.25l1.4-2.1A2 2 0 016.205 5h11.59a2 2 0 011.804 1.15L21 8.25M15.75 15a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-            </svg>
-          </button>
-        </div>
-
-        <!-- Name Section Below Picture -->
-        <div class="mt-4 flex items-center justify-center space-x-4">
-        <!-- Name -->
-        <h2 class="text-2xl font-semibold">John Doe</h2>
-
-        <!-- Change Name Button -->
-        <button id="changeNameButton" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M16.5 4.5a2.121 2.121 0 013 3L6.5 20.5H3v-3.5L16.5 4.5z" />
-          </svg>
-        </button>
-      </div>
-
-
-        <!-- Blood Group -->
-        <p class="text-red-600 mt-4">O+ Blood Group</p>
-      </section>
-
-    <!-- Profile Details -->
-    <section class="bg-white shadow rounded p-6 mb-6">
-      <h3 class="text-xl font-semibold mb-4">Donor Information</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        <div>
-          <p class="text-gray-500">Age:</p>
-          <p class="text-gray-800 font-semibold">28</p>
-        </div>
-        <div>
-          <p class="text-gray-500">Gender:</p>
-          <p class="text-gray-800 font-semibold">Male</p>
-        </div>
-        <div>
-          <p class="text-gray-500">Last Donation Date:</p>
-          <p class="text-gray-800 font-semibold">October 10, 2024</p>
-        </div>
-        <div>
-          <p class="text-gray-500">City:</p>
-          <p class="text-gray-800 font-semibold">New York, NY</p>
-        </div>
-        <div>
-          <p class="text-gray-500">Preferred Donation Type:</p>
-          <p class="text-gray-800 font-semibold">Whole Blood</p>
-        </div>
-        <div>
-          <p class="text-gray-500">Availability Status:</p>
-          <p id="availability" class="text-green-600 font-semibold">Available</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Donation History -->
-    <section class="bg-white shadow rounded p-6 mb-6">
-      <h3 class="text-xl font-semibold mb-4">Donation History</h3>
-      <div class="flex justify-between items-center gap-6 mt-6 grid grid-cols-1 sm:grid-cols-2">
-        <div>
-          <h3 class="text-lg font-semibold text-gray-700">Response Ratio</h3>
-          <p class="text-gray-800"><strong>Number of Donations:</strong> <span class="font-semibold">25</span></p>
-          <p><strong>Completed Requests:</strong> 20</p>
-          <p><strong>Missed Requests:</strong> 5</p>
-          <p><strong>Ratio:</strong> <span id="responseRatioText">0%</span></p>
-        </div>
-        <div class="neumorphic-card">
-          <svg class="progress-circle" width="100%" height="100%">
-            <circle class="progress-bg" cx="50%" cy="50%" r="45%"></circle>
-            <circle class="progress-bar" cx="50%" cy="50%" r="45%" stroke-dasharray="282" stroke-dashoffset="282"></circle>
-          </svg>
-          <div class="percentage-text" id="percentage">0%</div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- Report  -->
-    <section class="relative flex flex-col items-center justify-start bg-white p-6 mb-6 rounded">
-        <!-- Header -->
-        <h3 class="text-xl font-semibold  absolute top-0 left-2 p-4">Report</h3>
-
-        <!-- Slider Container -->
-        <div class="relative w-full max-w-lg mx-auto mt-16 overflow-hidden bg-white shadow-lg rounded-lg">
-          <!-- Image Slider -->
-          <div id="slider" class="flex transition-transform duration-500">
-            <!-- Images will be dynamically inserted here -->
-          </div>
-
-          <!-- Left Button -->
-          <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 text-gray-800 bg-transparent p-2 rounded-full hover:bg-gray-800 hover:text-white focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <!-- Right Button -->
-          <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 text-gray-800 bg-transparent p-2 rounded-full hover:bg-gray-800 hover:text-white focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-        </div>
-      </section>
-
-    <!-- Contact Information -->
-    <section class="bg-white shadow rounded p-6">
-      <h3 class="text-xl font-semibold mb-4">Contact Information</h3>
-      <p class="text-gray-600">
-        For privacy reasons, contact information is hidden. Use the button below to send a request to the donor.
-      </p>
-      <button id="contactButton" class="mt-4 px-4 py-2 bg-red-600 text-white font-semibold rounded hover:bg-red-700">
-        Request Contact
+      <!-- Change Photo Button -->
+      <button id="changePhotoButton" class="absolute bottom-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25h2.655a1 1 0 00.897-.553L7.618 6h8.764l1.066 1.697a1 1 0 00.897.553H21M3 8.25v9.5a2 2 0 002 2h14a2 2 0 002-2v-9.5M3 8.25l1.4-2.1A2 2 0 016.205 5h11.59a2 2 0 011.804 1.15L21 8.25M15.75 15a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+        </svg>
       </button>
-    </section>
-
-
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white p-4">
-    <div class="max-w-7xl mx-auto text-center">
-      <p>&copy; 2024 Blood Donation Project. All rights reserved.</p>
-      <p><a href="#" class="underline hover:text-gray-300">Privacy Policy</a> | <a href="#" class="underline hover:text-gray-300">Terms of Service</a></p>
     </div>
-  </footer>
 
-  <script src="../static/images/donorProfilePageScript.js"></script>
+    <!-- Name Section Below Picture -->
+    <div class="mt-4 flex items-center justify-center space-x-4">
+      <!-- Name -->
+      <h2 class="text-2xl font-semibold" th:text="${user.firstName} + ' ' + ${user.lastName}">John Doe</h2>
+
+      <!-- Change Name Button -->
+      <button id="changeNameButton" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M16.5 4.5a2.121 2.121 0 013 3L6.5 20.5H3v-3.5L16.5 4.5z" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Blood Group -->
+    <p class="text-red-600 mt-4" th:text="${user.bloodType}">O+ Blood Group</p>
+  </section>
+
+  <!-- Profile Details -->
+  <section class="bg-white shadow rounded p-6 mb-6">
+    <h3 class="text-xl font-semibold mb-4">Donor Information</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div>
+        <p class="text-gray-500">Age:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.age}">28</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Gender:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.gender}">Male</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Last Donation Date:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.lastDonationDate}">October 10, 2024</p>
+      </div>
+      <div>
+        <p class="text-gray-500">City:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.location}">New York, NY</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donation History -->
+  <section class="bg-white shadow rounded p-6 mb-6">
+    <h3 class="text-xl font-semibold mb-4">Donation History</h3>
+    <div class="flex justify-between items-center gap-6 mt-6 grid grid-cols-1 sm:grid-cols-2">
+      <div>
+        <h3 class="text-lg font-semibold text-gray-700">Response Ratio</h3>
+        <p class="text-gray-800"><strong>Number of Donations:</strong> <span class="font-semibold" th:text="${user.donationsCount}">25</span></p>
+        <p><strong>Completed Requests:</strong> <span class="font-semibold" th:text="${user.completedRequests}">20</span></p>
+        <p><strong>Missed Requests:</strong> <span class="font-semibold" th:text="${user.missedRequests}">5</span></p>
+        <p><strong>Ratio:</strong> <span id="responseRatioText" th:text="${user.responseRatio}">0%</span></p>
+      </div>
+      <div class="neumorphic-card">
+        <svg class="progress-circle" width="100%" height="100%">
+          <circle class="progress-bg" cx="50%" cy="50%" r="45%"></circle>
+          <circle class="progress-bar" cx="50%" cy="50%" r="45%" stroke-dasharray="282" stroke-dashoffset="282"></circle>
+        </svg>
+        <div class="percentage-text" id="percentage" th:text="${user.responseRatio}">0%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Report  -->
+  <section class="relative flex flex-col items-center justify-start bg-white p-6 mb-6 rounded">
+    <h3 class="text-xl font-semibold absolute top-0 left-2 p-4">Report</h3>
+
+    <!-- Slider Container -->
+    <div class="relative w-full max-w-lg mx-auto mt-16 overflow-hidden bg-white shadow-lg rounded-lg">
+      <div id="slider" class="flex transition-transform duration-500">
+        <!-- Images will be dynamically inserted here -->
+      </div>
+
+      <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+
+  </section>
+</main>
+
 </body>
 </html>

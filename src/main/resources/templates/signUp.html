@@ -49,6 +49,24 @@
                 <p class="text-sm text-red-600" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
             </div>
 
+            <!-- First Name -->
+            <div class="space-y-1">
+                <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                <input id="firstName" name="firstName" type="text" th:field="*{firstName}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your first name">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+            </div>
+
+            <!-- Last Name -->
+            <div class="space-y-1">
+                <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                <input id="lastName" name="lastName" type="text" th:field="*{lastName}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your last name">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+            </div>
+
             <!-- Email -->
             <div class="space-y-1">
                 <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
@@ -94,6 +112,28 @@
                 <p class="text-sm text-red-600" th:if="${#fields.hasErrors('location')}" th:errors="*{location}"></p>
             </div>
 
+            <!-- Age -->
+            <div class="space-y-1">
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input id="age" name="age" type="number" th:field="*{age}"
+                       class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                       placeholder="Enter your age">
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+            </div>
+
+            <!-- Gender -->
+            <div class="space-y-1">
+                <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                <select id="gender" name="gender" th:field="*{gender}"
+                        class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                    <option value="" disabled selected>Select your gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <p class="text-sm text-red-600" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+            </div>
+
             <!-- Password -->
             <div class="space-y-1">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
@@ -103,13 +143,13 @@
                 <p class="text-sm text-red-600" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </div>
 
-
             <!-- Submit Button -->
             <button type="submit"
                     class="w-full py-2 px-4 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
                 Sign Up
             </button>
         </form>
+
 
 
 

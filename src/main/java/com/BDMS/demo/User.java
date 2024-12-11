@@ -7,9 +7,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Role;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -44,15 +41,29 @@ public class User {
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
 
+    // New fields
+    @NotBlank(message = "First name is required")
+    private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    private String lastName;
+
+    private int age;
+
+    @NotBlank(message = "Gender is required")
+    private String gender;
+
+    private int donationsCount;
+
+    private int completedRequests;
+
+    private int missedRequests;
+
+    private double responseRatio;
+
+    private String lastDonationDate;
+
     public boolean isEnabled() {
         return true;
     }
-
-   /* @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "user_roles",
-           joinColumns = @JoinColumn(name = "user_id"),
-          inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles; // Stores user roles */
 }
