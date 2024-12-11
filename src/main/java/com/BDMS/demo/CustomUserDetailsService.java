@@ -1,9 +1,8 @@
-package com.BDMS.demo;
+/*package com.BDMS.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +35,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         // Return a Spring Security User with email as username
         Collection<? extends GrantedAuthority> authorities = List.of();
         return new User(
-                user.getEmail(),
+                user.getUsername(),
                 user.getPassword(),
                 user.isEnabled(), // Active or not
                 true, // Account not expired
@@ -46,3 +45,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         );
     }
 }
+*/

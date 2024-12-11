@@ -1,8 +1,10 @@
-package com.BDMS.demo;
+package com.BDMS.demo.Controller;
 
+import com.BDMS.demo.LoginForm;
+import com.BDMS.demo.User;
+import com.BDMS.demo.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

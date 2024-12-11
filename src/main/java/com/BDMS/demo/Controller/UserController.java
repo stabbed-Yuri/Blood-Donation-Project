@@ -1,5 +1,7 @@
-package com.BDMS.demo;
+package com.BDMS.demo.Controller;
 
+import com.BDMS.demo.User;
+import com.BDMS.demo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
