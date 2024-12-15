@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import com.BDMS.demo.repository.UserRepository;
+import com.BDMS.demo.persistent.UserEntity.*;
+import com.BDMS.demo.persistent.UserEntity;
 
 import java.util.List;
 
@@ -74,7 +77,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return username -> {
-            User user = userRepository.findByUsername(username);
+            UserEntity user = userRepository.findByUsername(username);
             if (user == null) {
                 throw new UsernameNotFoundException("User not found with email: " + username);
             }

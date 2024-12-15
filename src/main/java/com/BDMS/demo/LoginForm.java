@@ -12,6 +12,4 @@ public class LoginForm {
     private String password;
     private boolean rememberMe;
 
-
-
 }

@@ -1,6 +1,6 @@
 package com.BDMS.demo.Controller;
 
-import com.BDMS.demo.User;
+import com.BDMS.demo.persistent.UserEntity;
 import com.BDMS.demo.Service.UserService; // Assuming a UserService that fetches user data from the DB
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,7 +36,7 @@ public class ProfileController {
                 System.out.println("Authenticated username: " + username);
 
                 // Fetch user details from the database using the UserService
-                User user = userService.findByUsername(username); // Assuming a method like this exists
+                UserEntity user = userService.findByUsername(username); // Assuming a method like this exists
 
                 if (user != null) {
                     model.addAttribute("user", user); // Add the user object to the model

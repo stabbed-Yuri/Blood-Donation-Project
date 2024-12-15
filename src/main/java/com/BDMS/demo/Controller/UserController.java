@@ -1,7 +1,6 @@
 package com.BDMS.demo.Controller;
 
-import com.BDMS.demo.User;
-import com.BDMS.demo.UserRepository;
+import com.BDMS.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import com.BDMS.demo.persistent.UserEntity;
 
 import jakarta.validation.Valid;
 
@@ -23,13 +23,13 @@ public class UserController {
 
     @GetMapping("/signUp")
     public String showSignUpForm(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserEntity());
         model.addAttribute("success", false);
         return "/signUp"; // Render sign-up page
     }
 
     @PostMapping("/signUp")
-    public String handleSignUp(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+    public String handleSignUp(@Valid @ModelAttribute("user") UserEntity user, BindingResult bindingResult, Model model) {
         // Check if there were any validation errors in the user form
         if (bindingResult.hasErrors()) {
             return "/signUp"; // If validation fails, return to sign-up page

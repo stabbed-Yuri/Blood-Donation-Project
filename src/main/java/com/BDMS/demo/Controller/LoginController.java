@@ -1,8 +1,8 @@
 package com.BDMS.demo.Controller;
 
 import com.BDMS.demo.LoginForm;
-import com.BDMS.demo.User;
-import com.BDMS.demo.UserRepository;
+import com.BDMS.demo.persistent.UserEntity;
+import com.BDMS.demo.repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,7 +35,7 @@ public class LoginController {
         System.out.println("Login attempt: Username = " + username + ", Password = " + password);
 
         // Fetch user by username
-        User user = userRepository.findByUsername(username);
+        UserEntity user = userRepository.findByUsername(username);
 
         if (user == null) {
             System.out.println("No user found with username: " + username);
