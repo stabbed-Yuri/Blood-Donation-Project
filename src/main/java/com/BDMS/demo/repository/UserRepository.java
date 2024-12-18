@@ -1,7 +1,6 @@
 package com.BDMS.demo.repository;
 
 import com.BDMS.demo.persistent.UserEntity;
-import com.BDMS.demo.persistent.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

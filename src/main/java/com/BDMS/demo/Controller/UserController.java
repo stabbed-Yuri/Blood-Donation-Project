@@ -1,25 +1,34 @@
 package com.BDMS.demo.Controller;
 
 import com.BDMS.demo.repository.UserRepository;
+import com.BDMS.demo.persistent.UserEntity;
+import com.BDMS.demo.Service.UserService;
+import com.BDMS.demo.Service.UserServiceNew;
+
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import com.BDMS.demo.persistent.UserEntity;
+import org.springframework.web.bind.annotation.*;
+
 
 import jakarta.validation.Valid;
 
-@Controller
+import java.util.List;
+
+@RestController
+@RequestMapping("/signUp")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private UserService userService;
+
+    private UserServiceNew userServiceNew;
 
     @GetMapping("/signUp")
     public String showSignUpForm(Model model) {
@@ -55,4 +64,5 @@ public class UserController {
         model.addAttribute("success", true); // Add success message to the model
         return "redirect:/login"; // Redirect to login page after successful sign-up
     }
+
 }
