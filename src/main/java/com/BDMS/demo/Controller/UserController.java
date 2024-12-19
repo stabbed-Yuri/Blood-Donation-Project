@@ -21,11 +21,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/signUp")
 public class UserController {
-
+    @Autowired
     private UserRepository userRepository;
 
     private BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-
+    @Autowired
     private UserService userService;
 
 

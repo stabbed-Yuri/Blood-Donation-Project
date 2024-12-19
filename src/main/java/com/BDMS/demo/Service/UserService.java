@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class UserService {
@@ -84,5 +86,17 @@ public class UserService {
     public void deleteUser(String username) {
         UserEntity user = findByUsername(username); // Find the user by username
         userRepository.delete(user); // Delete the user from the database
+    }
+
+    public List<UserEntity> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public List<UserEntity> getUsersByBloodGroup(String bloodType) {
+        return userRepository.findByBloodType(bloodType);
+    }
+
+    public List<UserEntity> searchUsersByLocationAndBloodType(String location, String bloodType) {
+        return userRepository.findByLocationContainingIgnoreCaseAndBloodType(location, bloodType);
     }
 }

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Donors</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+<header class="bg-white shadow-md">
+  <div class="flex items-center justify-between p-4">
+    <a href="/" class="flex items-center gap-2">
+      <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+      <h1 class="text-2xl font-bold text-red-500">BDMS Project</h1>
+    </a>
+    <div th:replace="~{navbar.html}"></div>
+  </div>
+</header>
+
+<section class="text-center mb-10">
+  <div class="text-center p-6">
+    <h1 class="text-3xl font-bold">Available Donors</h1>
+  </div>
+
+  <!-- Search and Filter -->
+  <div class="flex flex-col md:flex-row justify-center items-center gap-4 p-4">
+    <form th:action="@{/donorListPage}" method="get" class="flex gap-4">
+      <input
+              type="text"
+              name="location"
+              placeholder="Search by location..."
+              class="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+      >
+      <select
+              name="bloodGroup"
+              class="w-full md:w-1/4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+      >
+        <option value="">Filter by Blood Group</option>
+        <option value="A+">A+</option>
+        <option value="A-">A-</option>
+        <option value="B+">B+</option>
+        <option value="B-">B-</option>
+        <option value="O+">O+</option>
+        <option value="O-">O-</option>
+        <option value="AB+">AB+</option>
+        <option value="AB-">AB-</option>
+      </select>
+      <button type="submit" class="bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded-lg">Search</button>
+    </form>
+  </div>
+
+  <!-- Donor Cards Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4" id="donor-list">
+    <div th:each="donor : ${donors}" class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+      <div class="flex items-center space-x-4">
+<!--        <img th:src="${donor.profileImageUrl}" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-600">-->
+        <div>
+  <h2 class="text-lg font-bold" th:text="${donor.firstName} + ' ' + ${donor.lastName}">John Doe</h2>
+  <p class="text-red-600" th:text="'Blood Group: ' + ${donor.bloodType}">Blood Group: A+</p>
+</div>
+      </div>
+      <div class="mt-4 text-gray-700 space-y-2 text-left">
+        <p><span class="font-bold">Location:</span> <span th:text="${donor.location}">Downtown, City</span></p>
+        <p><span class="font-bold">Last Donated:</span> <span th:text="${donor.lastDonationDate}">15/11/2024</span></p>
+      </div>
+      <button
+              class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center"
+              onclick="markAsRequested(this)"
+      >
+        Request Donation
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  function markAsRequested(button) {
+    button.textContent = "Requested";
+    button.classList.add("bg-green-500", "cursor-not-allowed");
+    button.classList.remove("bg-red-600", "hover:bg-red-700");
+    button.disabled = true;
+  }
+</script>
+</body>
+</html>
