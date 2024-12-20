@@ -145,22 +145,19 @@
 
       <!-- Donor Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4">
-
-        <!-- Donor Card 1 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+        <div th:each="recipient : ${recipients}" class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
           <div class="flex items-center space-x-4">
             <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-600">
-            <div>
-              <h2 class="text-lg font-bold">Tipu Sultan Eiko</h2>
-              <!-- <p class="text-red-600">Blood Group: B+</p> -->
-            </div>
+           <div>
+              <h2 class="text-lg font-bold" th:text="${recipient.user.firstName} + ' ' + ${recipient.user.lastName}">Recipient Name</h2>
+          </div>
           </div>
           <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
+            <p><span class="font-bold">Patient's Problem:</span> <span th:text="${recipient.medical_purpose}">Medical Purpose</span></p>
+            <p><span class="font-bold">Blood Type:</span> <span th:text="${recipient.blood_g_needed}">Blood Type</span></p>
+            <p><span class="font-bold">Amount Required:</span> <span th:text="${recipient.volume_needed}">Volume Needed</span></p>
+            <p><span class="font-bold">Location:</span> <span th:text="${recipient.hbc.hbc_name}">Hospital Name</span></p>
+            <p><span class="font-bold">Time for Donation:</span> <span th:text="${recipient.registration_date}">Registration Date</span></p>
           </div>
           <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
@@ -169,129 +166,8 @@
             Call Now
           </button>
         </div>
+      </div>
 
-        <!-- Donor Card 2 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
-            <div>
-              <h2 class="text-lg font-bold">Muhammad Taqi Tahmid Khan</h2>
-              <!-- <p class="text-red-500">Blood Group: B+</p> -->
-            </div>
-          </div>
-          <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-          </div>
-          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
-            </svg>
-            Call Now
-          </button>
-        </div>
-
-        <!-- Donor Card 3 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
-            <div>
-              <h2 class="text-lg font-bold">Aisha Rahman</h2>
-              <!-- <p class="text-red-500">Blood Group: A-</p> -->
-            </div>
-          </div>
-          <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-          </div>
-          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
-            </svg>
-            Call Now
-          </button>
-        </div>
-
-        <!-- Donor Card 4 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
-            <div>
-              <h2 class="text-lg font-bold">Ahmed Karim</h2>
-              <!-- <p class="text-red-500">Blood Group: O+</p> -->
-            </div>
-          </div>
-          <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-          </div>
-          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
-            </svg>
-            Call Now
-          </button>
-        </div>
-
-
-        <!-- Donor Card 5 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
-            <div>
-              <h2 class="text-lg font-bold">Aisha Rahman</h2>
-              <!-- <p class="text-red-500">Blood Group: A-</p> -->
-            </div>
-          </div>
-          <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-
-          </div>
-          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
-            </svg>
-            Call Now
-          </button>
-        </div>
-
-        <!-- Donor Card 6 -->
-        <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
-          <div class="flex items-center space-x-4">
-            <img src="https://via.placeholder.com/50" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500">
-            <div>
-              <h2 class="text-lg font-bold">Aisha Rahman</h2>
-              <!-- <p class="text-red-500">Blood Group: A-</p> -->
-            </div>
-          </div>
-          <div class="mt-4 text-gray-700 space-y-2 text-left">
-            <p><span class="font-bold">Patient's Problem:</span> Undergoing surgery</p>
-            <p><span class="font-bold">Blood Type:</span> A+</p>
-            <p><span class="font-bold">Amount Required:</span> 2</p>
-            <p><span class="font-bold">Location:</span> 264/1/J Manikdi Namapara, Dhaka Cantonment</p>
-            <p><span class="font-bold">Time for Donation:</span> 10/11/2024 5:00pm</p>
-          </div>
-          <button aria-label="Call Now" class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
-            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M2.29 7.29a1 1 0 011.42 0l3.29 3.29a1 1 0 010 1.42L3.71 15.71a1 1 0 01-1.42-1.42l2.88-2.88-2.88-2.88a1 1 0 010-1.42z"></path>
-            </svg>
-            Call Now
-          </button>
-        </div>
-        </div>
       </section>
 
     <!-- Section 4 : How It Works Section -->

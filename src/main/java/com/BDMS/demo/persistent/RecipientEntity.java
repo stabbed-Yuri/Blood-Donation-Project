@@ -34,4 +34,8 @@ public class RecipientEntity
     @JoinColumn(name="user_id", nullable=false)
     private UserEntity user;
 
+    @ManyToOne
+    @JoinColumn(name = "hbc_id", nullable = false)
+    private HBCEntity hbc;
+
 }

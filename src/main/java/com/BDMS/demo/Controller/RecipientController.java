@@ -1,8 +1,10 @@
 package com.BDMS.demo.Controller;
 
 import com.BDMS.demo.Service.RecipientService;
+import com.BDMS.demo.persistent.HBCEntity;
 import com.BDMS.demo.persistent.RecipientEntity;
 import com.BDMS.demo.persistent.UserEntity;
+import com.BDMS.demo.repository.HBCRepository;
 import com.BDMS.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,31 +19,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 @Controller
 public class RecipientController {
 
     private final RecipientService recipientService;
     private final UserRepository userRepository;
+    private final HBCRepository hbcRepository;
     private static final Logger logger = LoggerFactory.getLogger(RecipientController.class);
 
     @Autowired
-    public RecipientController(RecipientService recipientService, UserRepository userRepository) {
+    public RecipientController(RecipientService recipientService, UserRepository userRepository, HBCRepository hbcRepository) {
         this.recipientService = recipientService;
         this.userRepository = userRepository;
+        this.hbcRepository = hbcRepository;
     }
 
     @GetMapping("/formPage")
     public String showForm(Model model) {
-        // Assuming you have a method to get the logged-in user
         UserEntity loggedInUser = getLoggedInUser();
+        List<HBCEntity> hbcList = hbcRepository.findAll();
         model.addAttribute("recipient", new RecipientEntity());
         model.addAttribute("user", loggedInUser);
+        model.addAttribute("hbcList", hbcList);
         return "formPage";
     }
 
     @PostMapping("/formPage")
     public String handleFormSubmission(@ModelAttribute RecipientEntity recipient, Model model) {
-        // Assuming you have a method to get the logged-in user
         UserEntity loggedInUser = getLoggedInUser();
         Long userId = loggedInUser.getId();
         logger.info("Received userId: " + userId);
