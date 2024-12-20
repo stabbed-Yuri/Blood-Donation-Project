@@ -7,7 +7,7 @@ import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Date;
+;
 
 @Data
 @Entity
@@ -22,7 +22,7 @@ public class RecipientEntity
     public String medical_purpose;
 
     @Column(name="registration_date")
-    public Date registration_date;
+    public String registration_date;
 
     @Column(name="volume_needed")
     public Integer volume_needed;
@@ -30,7 +30,8 @@ public class RecipientEntity
     @Column(name="blood_g_needed")
     public String blood_g_needed;
 
-    @Column(name="user_id")
-    public Integer user_id;
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private UserEntity user;
 
 }
