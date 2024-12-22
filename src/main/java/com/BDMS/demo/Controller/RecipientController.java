@@ -5,7 +5,9 @@ import com.BDMS.demo.persistent.HBCEntity;
 import com.BDMS.demo.persistent.RecipientEntity;
 import com.BDMS.demo.persistent.UserEntity;
 import com.BDMS.demo.repository.HBCRepository;
+import com.BDMS.demo.repository.RecipientRepository;
 import com.BDMS.demo.repository.UserRepository;
+import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,13 +29,24 @@ public class RecipientController {
     private final RecipientService recipientService;
     private final UserRepository userRepository;
     private final HBCRepository hbcRepository;
+    private final RecipientRepository recipientRepository;
     private static final Logger logger = LoggerFactory.getLogger(RecipientController.class);
 
     @Autowired
-    public RecipientController(RecipientService recipientService, UserRepository userRepository, HBCRepository hbcRepository) {
+    public RecipientController(RecipientService recipientService, UserRepository userRepository, HBCRepository hbcRepository, RecipientRepository recipientRepository) {
         this.recipientService = recipientService;
         this.userRepository = userRepository;
         this.hbcRepository = hbcRepository;
+        this.recipientRepository = recipientRepository;
+    }
+    @GetMapping("/recipientListPage")
+    public String getRecipientListPage( Model model) {
+
+
+        List<RecipientEntity> recipients = recipientRepository.findAll();
+        model.addAttribute("recipients", recipients);
+
+        return "recipientListPage";
     }
 
     @GetMapping("/formPage")

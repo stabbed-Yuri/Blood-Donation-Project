@@ -19,10 +19,10 @@ public class HomeController {
     }
 
     @GetMapping("/homePage")
-public String showHomePage(Model model) {
+    public String showHomePage(Model model) {
 
     List<RecipientEntity> recipients = recipientRepository.findAll();
-    model.addAttribute("recipients", recipients);
+    model.addAttribute("recipient", recipients);
     return "homePage";
 }
 }

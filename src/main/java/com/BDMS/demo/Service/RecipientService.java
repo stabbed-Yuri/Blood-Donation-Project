@@ -5,6 +5,8 @@ import com.BDMS.demo.repository.RecipientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RecipientService {
 
@@ -14,6 +16,7 @@ public class RecipientService {
     public RecipientService(RecipientRepository recipientRepository) {
         this.recipientRepository = recipientRepository;
     }
+
 
     public void saveRecipient(RecipientEntity recipient) {
         recipientRepository.save(recipient);
