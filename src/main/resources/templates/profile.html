@@ -96,9 +96,8 @@
     <div class="flex justify-between items-center gap-6 mt-6 grid grid-cols-1 sm:grid-cols-2">
       <div>
         <h3 class="text-lg font-semibold text-gray-700">Response Ratio</h3>
-        <p class="text-gray-800"><strong>Number of Donations:</strong> <span class="font-semibold" th:text="${user.donationsCount}">25</span></p>
-        <p><strong>Completed Requests:</strong> <span class="font-semibold" th:text="${user.completedRequests}">20</span></p>
-        <p><strong>Missed Requests:</strong> <span class="font-semibold" th:text="${user.missedRequests}">5</span></p>
+        <p class="text-gray-800"><strong>Accepted Requests:</strong> <span class="font-semibold" th:text="${user.donationsCount}">25</span></p>
+        <p><strong>Completed Donations:</strong> <span class="font-semibold" th:text="${user.completedRequests}">20</span></p>
         <p><strong>Ratio:</strong> <span id="responseRatioText" th:text="${user.responseRatio}">0%</span></p>
       </div>
       <div class="neumorphic-card">
