@@ -27,7 +27,8 @@
 
     <!-- HBC Cards Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4" id="hbc-list">
-        <div th:each="hbc :${hbc}" class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+        <!--/*@thymesVar id="hbc" type=""*/-->
+        <div th:each="hbc : ${hbc}" class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
             <div class="flex items-center space-x-4">
                 <div>
                     <h2 class="text-lg font-bold" th:text="${hbc.hbc_name}">Organization Name</h2>

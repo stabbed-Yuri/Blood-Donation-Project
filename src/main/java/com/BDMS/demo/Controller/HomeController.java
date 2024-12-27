@@ -24,5 +24,9 @@ public class HomeController {
     List<RecipientEntity> recipients = recipientRepository.findAll();
     model.addAttribute("recipient", recipients);
     return "homePage";
-}
+    }
+    @GetMapping("/")
+    public String redirectToHomePage(){
+        return "redirect:/homePage";
+    }
 }
