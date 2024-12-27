@@ -10,6 +10,11 @@
 <div class="container mt-4">
   <h1 class="text-center mb-4">Request Summary</h1>
 
+  <!-- Display total matching donors notified -->
+  <div class="text-center mb-4">
+    <h5>Total Matching Donors Notified: <span th:text="${totalMatchingDonorsNotified}"></span></h5>
+  </div>
+
   <!-- Iterate through each request -->
   <div th:each="request : ${requests}">
     <div class="card mb-3">

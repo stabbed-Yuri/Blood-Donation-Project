@@ -35,22 +35,24 @@ public class RequestController {
     public String getRequestSummary(Principal principal, Model model) {
         UserEntity loggedInUser = getLoggedInUser(principal);
         List<RecipientEntity> requests = requestService.getRequestsByUser(loggedInUser.getId());
+        int totalMatchingDonorsNotified = recipientService.getTotalMatchingDonorsNotified();
         model.addAttribute("requests", requests);
+        model.addAttribute("totalMatchingDonorsNotified", totalMatchingDonorsNotified);
         return "requestSummary";
     }
 
 
-    @PostMapping("/requests/complete")
-    public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestParam Long donorId, RedirectAttributes redirectAttributes) {
-        boolean success = requestService.markRequestAsCompleted(requestId, donorId);
+  @PostMapping("/requests/complete")
+public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestParam Long donorId, RedirectAttributes redirectAttributes) {
+    boolean success = requestService.markRequestAsCompleted(requestId, donorId);
 
-        if (success) {
-            redirectAttributes.addFlashAttribute("message", "Donor marked as completed.");
-        } else {
-            redirectAttributes.addFlashAttribute("error", "Donor has already been marked as completed.");
-        }
-        return "redirect:/requestSummary";
+    if (success) {
+        redirectAttributes.addFlashAttribute("message", "Donor marked as completed.");
+    } else {
+        redirectAttributes.addFlashAttribute("error", "Donor has already been marked as completed.");
     }
+    return "redirect:/requestSummary";
+}
 
     @PostMapping("/requests/close")
     public String closeRequest(@RequestParam Integer requestId) {
@@ -68,7 +70,7 @@ public class RequestController {
 
         // Add the unresponded requests to the model
         model.addAttribute("requests", unrespondedRequests);
-
+        model.addAttribute("currentUser", currentUser);
         // Return the name of the HTML template
         return "pending-requests";
     }
