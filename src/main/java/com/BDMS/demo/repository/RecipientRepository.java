@@ -18,4 +18,5 @@ public interface RecipientRepository extends JpaRepository<RecipientEntity, Inte
     List<RecipientEntity> findByBloodGNeededAndClosedFalse(@Param("bloodGNeeded") String bloodGNeeded);
     @Query("SELECT r FROM RecipientEntity r JOIN r.acceptedUsers u WHERE u.id = :userId")
     List<RecipientEntity> findAcceptedRequestsByUser(@Param("userId") Long userId);
+
 }

@@ -3,28 +3,205 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script defer src="script.js"></script>
-  <link rel="stylesheet" href="../static/images/donorProfilePageStyle.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Blood Donation - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery CDN -->
 </head>
-<body>
-    <div class="relative flex items-center space-x-4 mt-4">
-        <!-- Name Section -->
-        <h2 class="text-2xl font-semibold">John Doe</h2>
-        
-        <!-- Change Name Button -->
-        <button id="changePhotoButton" class="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M16.5 4.5a2.121 2.121 0 013 3L6.5 20.5H3v-3.5L16.5 4.5z" />
-          </svg>
-        </button>
-      </div>
-      
-      <!-- Blood Group -->
-      <p class="text-red-600 mt-2">O+ Blood Group</p>
-      
+<body class="bg-gray-100">
+
+<!-- Header Section -->
+<header class="bg-white shadow-lg">
+    <div class="flex items-center justify-between p-4">
+        <a href="/homePage" class="flex items-center gap-2">
+            <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+            <h1 class="text-xl md:text-2xl font-bold text-red-500">BDMS Project</h1>
+        </a>
+        <div th:replace="~{navbar.html}"></div>
+    </div>
+</header>
+
+<!-- Main Content Section -->
+<main class="pt-5 flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8">
+
+    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md mx-auto">
+        <h2 class="text-center text-3xl font-extrabold text-gray-900">Sign Up to Donate</h2>
+            <div th:if="${success}"
+                 class="alert success alert-dismissible fade show" role="alert">
+                <strong>Well done!</strong> You successfully signed up.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+            </div>
+                <form action="#" th:action="@{/signUp}" th:object="${user}" method="post" class="space-y-6 bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+                    <h2 class="text-2xl font-bold text-center text-gray-900">Sign Up</h2>
+
+                    <!-- Username -->
+                    <div class="space-y-1">
+                        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                        <input id="username" name="username" type="text" th:field="*{username}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your username">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+                    </div>
+
+                    <!-- First Name -->
+                    <div class="space-y-1">
+                        <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
+                        <input id="firstName" name="firstName" type="text" th:field="*{firstName}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your first name">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></p>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="space-y-1">
+                        <label for="lastName" class="block text-sm font-medium text-gray-700">Last Name</label>
+                        <input id="lastName" name="lastName" type="text" th:field="*{lastName}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your last name">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></p>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-1">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+                        <input id="email" name="email" type="email" th:field="*{email}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your email">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+                    </div>
+
+                    <!-- Mobile Number -->
+                    <div class="space-y-1">
+                        <label for="number" class="block text-sm font-medium text-gray-700">Mobile Number</label>
+                        <input id="number" name="number" type="tel" th:field="*{number}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your mobile number">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('number')}" th:errors="*{number}"></p>
+                    </div>
+
+                    <!-- Blood Type -->
+                    <div class="space-y-1">
+                        <label for="bloodType" class="block text-sm font-medium text-gray-700">Blood Type</label>
+                        <select id="bloodType" name="bloodType" th:field="*{bloodType}"
+                                class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                            <option value="" disabled selected>Select your blood type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('bloodType')}" th:errors="*{bloodType}"></p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                        <input id="age" name="age" type="number" th:field="*{age}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your age">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></p>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="space-y-1">
+                        <label for="gender" class="block text-sm font-medium text-gray-700">Gender</label>
+                        <select id="gender" name="gender" th:field="*{gender}"
+                                class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                            <option value="" disabled selected>Select your gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></p>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="space-y-1">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                        <input id="password" name="password" type="password" th:field="*{password}"
+                               class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900"
+                               placeholder="Enter your password">
+                        <p class="text-sm text-red-600" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+                    </div>
+
+            <!-- Other form fields -->
+
+            <!-- Country -->
+            <div class="space-y-1">
+                <label for="country" class="block text-sm font-medium text-gray-700">Country</label>
+                <select id="country" name="country" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                    <option value="" disabled selected>Select your country</option>
+                </select>
+            </div>
+
+            <!-- City -->
+            <div class="space-y-1">
+                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
+                <select id="city" name="city" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                    <option value="" disabled selected>Select your city</option>
+                </select>
+            </div>
+
+            <!-- Area -->
+            <div class="space-y-1">
+                <label for="area" class="block text-sm font-medium text-gray-700">Area</label>
+                <select id="area" name="area" class="w-full px-4 py-2 border rounded-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-gray-900">
+                    <option value="" disabled selected>Select your area</option>
+                </select>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full py-2 px-4 bg-red-600 text-white font-bold rounded-full hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Sign Up
+            </button>
+        </form>
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer class="bg-gray-900 text-white p-4">
+    <div class="max-w-7xl mx-auto text-center">
+        <p>&copy; 2024 Blood Donation Project. All rights reserved.</p>
+        <p><a href="#" class="underline hover:text-gray-300">Privacy Policy</a> | <a href="#" class="underline hover:text-gray-300">Terms of Service</a></p>
+    </div>
+</footer>
+
+<script>
+    $(document).ready(function() {
+        // Fetch countries
+        $.get('/api/countries', function(data) {
+            data.forEach(function(country) {
+                $('#country').append(new Option(country.name, country.iso2));
+            });
+        });
+
+        // Fetch cities based on selected country
+        $('#country').change(function() {
+            var countryCode = $(this).val();
+            $('#city').empty().append(new Option('Select your city', '', true, true));
+            $('#area').empty().append(new Option('Select your area', '', true, true));
+            $.get('/api/cities', { countryCode: countryCode }, function(data) {
+                data.forEach(function(city) {
+                    $('#city').append(new Option(city.name, city.id));
+                });
+            });
+        });
+
+        // Fetch areas based on selected city
+        $('#city').change(function() {
+            var countryCode = $('#country').val();
+            var cityCode = $(this).val();
+            $('#area').empty().append(new Option('Select your area', '', true, true));
+            $.get('/api/areas', { countryCode: countryCode, cityCode: cityCode }, function(data) {
+                data.forEach(function(area) {
+                    $('#area').append(new Option(area.name, area.id));
+                });
+            });
+        });
+    });
+</script>
 </body>
 </html>
