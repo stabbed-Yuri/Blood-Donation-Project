@@ -14,6 +14,7 @@ public class RecipientEntity {
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "r_id")
     private Integer r_id;
 
     @Column(name = "medical_purpose")
