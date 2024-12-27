@@ -7,7 +7,9 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-    @Data
+import java.util.List;
+
+@Data
     @Entity
     @Table(name = "users")
     public class UserEntity {
@@ -60,6 +62,9 @@ import lombok.Data;
         private double responseRatio;
 
         private String lastDonationDate;
+
+        @OneToMany(mappedBy = "user")
+        private List<RecipientEntity> recipients;
 
         public boolean isEnabled() {
             return true;

@@ -2,6 +2,8 @@ package com.BDMS.demo.repository;
 
 import com.BDMS.demo.persistent.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -16,7 +18,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     UserEntity findByUsername(String username);
 
     List<UserEntity> findByBloodType(String bloodType);
-
+    @Query("SELECT COUNT(u) FROM UserEntity u WHERE u.bloodType = :bloodType")
+    long countByBloodType(@Param("bloodType") String bloodType);
 
     List<UserEntity> findByLocationContainingIgnoreCaseAndBloodType(String location, String bloodType);
 }

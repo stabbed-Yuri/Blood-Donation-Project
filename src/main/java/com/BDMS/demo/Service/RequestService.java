@@ -18,8 +18,14 @@ public class RequestService {
     @Autowired
     private UserRepository userRepository;
     public List<RecipientEntity> getRequestsByUser(Long userId) {
-        return recipientRepository.findByUserId(userId);
+    List<RecipientEntity> requests = recipientRepository.findByUserId(userId);
+    for (RecipientEntity request : requests) {
+        String bloodGroupNeeded = request.getBlood_g_needed();
+        int matchingDonorsCount = (int) userRepository.countByBloodType(bloodGroupNeeded);
+        request.setTotalMatchingDonorNotified(matchingDonorsCount);
     }
+    return requests;
+}
 
     public void saveRequest(RecipientEntity recipient) {
         recipientRepository.save(recipient);

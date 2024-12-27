@@ -41,14 +41,22 @@ public class RecipientEntity {
     @Getter
     @Column(name = "total_matching_donor_notified")
     private Integer totalMatchingDonorNotified;
+    public void setTotalMatchingDonorNotified(Integer totalMatchingDonorNotified) {
+        this.totalMatchingDonorNotified = totalMatchingDonorNotified;
+    }
 
     @Getter
     @Column(name = "accepted_count")
     private Integer acceptedCount;
 
-    @Getter
+public Integer getAcceptedCount() {
+        return acceptedCount != null ? acceptedCount : 0;
+    }
     @Column(name = "rejected_count")
     private Integer rejectedCount;
+    public Integer getRejectedCount() {
+        return rejectedCount != null ? rejectedCount : 0;
+    }
 
     @Getter
     @ManyToMany
@@ -81,14 +89,14 @@ public class RecipientEntity {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<UserEntity> completedDonors;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recipient_responded_users",
             joinColumns = @JoinColumn(name = "request_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<UserEntity> respondedUsers ;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "recipient_rejected_users",
             joinColumns = @JoinColumn(name = "request_id"),
