@@ -71,4 +71,27 @@ public class RecipientEntity {
         return this.hbc.getHbc_name();
     }
 
+    @Getter
+    @Setter
+    @ManyToMany
+    @JoinTable(
+            name = "recipient_completed_donors",
+            joinColumns = @JoinColumn(name = "recipient_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> completedDonors;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "recipient_responded_users",
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> respondedUsers ;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "recipient_rejected_users",
+            joinColumns = @JoinColumn(name = "request_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<UserEntity> rejectedUsers;
 }

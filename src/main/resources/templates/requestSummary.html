@@ -9,9 +9,12 @@
 <body>
 <div class="container mt-4">
   <h1 class="text-center mb-4">Request Summary</h1>
+
+  <!-- Iterate through each request -->
   <div th:each="request : ${requests}">
     <div class="card mb-3">
       <div class="card-body">
+        <!-- Request Details -->
         <h5 class="card-title">Request ID: <span th:text="${request.r_id}"></span></h5>
         <p class="card-text">Medical Purpose: <span th:text="${request.medical_purpose}"></span></p>
         <p class="card-text">Blood Group: <span th:text="${request.blood_g_needed}"></span></p>
@@ -19,18 +22,29 @@
         <p class="card-text">Total Matching Donors Notified: <span th:text="${request.totalMatchingDonorNotified}"></span></p>
         <p class="card-text">Accepted: <span th:text="${request.acceptedCount}"></span></p>
         <p class="card-text">Rejected: <span th:text="${request.rejectedCount}"></span></p>
-        <h6>Donors:</h6>
+
+        <!-- Donors Section -->
+        <h6>Accepted Donors:</h6>
         <ul>
           <li th:each="donor : ${request.acceptedUsers}">
-            <span th:text="${donor.username}"></span> -
-<!--            <span th:text="${donor.status}"></span>-->
+            <!-- Donor Details -->
+            <span th:text="${donor.firstName + ' ' + donor.lastName}"></span>
+            <span th:text="${donor.number}"></span>
+
+            <!-- Mark as Completed Button -->
             <form th:action="@{/requests/complete}" method="post" class="d-inline">
               <input type="hidden" name="requestId" th:value="${request.r_id}" />
               <input type="hidden" name="donorId" th:value="${donor.id}" />
-              <button type="submit" class="btn btn-success btn-sm">Mark as Completed</button>
+              <button type="submit"
+                      class="btn btn-success btn-sm"
+                      th:disabled="${#lists.contains(request.completedDonors, donor)}">
+                <span th:text="${#lists.contains(request.completedDonors, donor) ? 'Completed' : 'Mark as Completed'}"></span>
+              </button>
             </form>
           </li>
         </ul>
+
+        <!-- Close Request Form -->
         <form th:action="@{/requests/close}" method="post" class="mt-3">
           <input type="hidden" name="requestId" th:value="${request.r_id}" />
           <button type="submit" class="btn btn-danger">Close Request</button>
