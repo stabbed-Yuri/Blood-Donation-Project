@@ -99,4 +99,8 @@ public class UserService {
     public List<UserEntity> searchUsersByLocationAndBloodType(String location, String bloodType) {
         return userRepository.findByLocationContainingIgnoreCaseAndBloodType(location, bloodType);
     }
+
+    public void saveUser(UserEntity currentUser) {
+        userRepository.save(currentUser);
+    }
 }
