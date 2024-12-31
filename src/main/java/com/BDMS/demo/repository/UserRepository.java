@@ -21,6 +21,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query("SELECT COUNT(u) FROM UserEntity u WHERE u.bloodType = :bloodType")
     long countByBloodType(@Param("bloodType") String bloodType);
 
-    List<UserEntity> findByLocationContainingIgnoreCaseAndBloodType(String location, String bloodType);
+
+    List<UserEntity> findByDivisionContainingIgnoreCaseAndBloodType(String division, String bloodType);
 }
 

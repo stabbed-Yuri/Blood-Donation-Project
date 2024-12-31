@@ -23,12 +23,12 @@ public class DonorController {
 
 
     @GetMapping("/donorListPage")
-    public String showDonors(@RequestParam(required = false) String location,
+    public String showDonors(@RequestParam(required = false) String division,
                              @RequestParam(required = false) String bloodGroup,
                              Model model) {
         List<UserEntity> donors;
-        if ((location != null && !location.isEmpty()) || (bloodGroup != null && !bloodGroup.isEmpty())) {
-            donors = userService.searchUsersByLocationAndBloodType(location, bloodGroup);
+        if ((division != null && !division.isEmpty()) || (bloodGroup != null && !bloodGroup.isEmpty())) {
+            donors = userService.searchByDivisionAndBloodType(division, bloodGroup);
         } else {
             donors = userService.getAllUsers();
         }

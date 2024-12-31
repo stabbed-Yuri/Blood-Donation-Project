@@ -1,5 +1,6 @@
 package com.BDMS.demo.persistent;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -33,9 +34,8 @@ import java.util.List;
         @NotBlank(message = "Blood type is required")
         private String bloodType;
 
-        @NotBlank(message = "Location is required")
-        @Size(min = 3, max = 50, message = "Location must be between 3 and 50 characters")
-        private String location;
+        @NotBlank(message = "Division is required")
+        private String division;
 
         @NotBlank(message = "Password is required")
         @Size(min = 6, message = "Password must be at least 6 characters long")
@@ -47,6 +47,12 @@ import java.util.List;
 
         @NotBlank(message = "Last name is required")
         private String lastName;
+
+        @NotBlank(message = "District is required")
+        private String district;
+
+        @NotBlank(message = "Upazila is required")
+        private String upazila;
 
         private int age;
 

@@ -30,8 +30,8 @@
     <form th:action="@{/donorListPage}" method="get" class="flex gap-4">
       <input
               type="text"
-              name="location"
-              placeholder="Search by location..."
+              name="division"
+              placeholder="Search by division..."
               class="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
       >
       <select
@@ -62,7 +62,7 @@
        </div>
       </div>
       <div class="mt-4 text-gray-700 space-y-2 text-left">
-        <p><span class="font-bold">Location:</span> <span th:text="${donor.location}">Downtown, City</span></p>
+        <p><span class="font-bold">Division:</span> <span th:text="${donor.division}">Downtown, City</span></p>
         <p><span class="font-bold">Last Donated:</span> <span th:text="${donor.lastDonationDate}">15/11/2024</span></p>
       </div>
       <button

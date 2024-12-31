@@ -96,8 +96,8 @@ public class UserService {
         return userRepository.findByBloodType(bloodType);
     }
 
-    public List<UserEntity> searchUsersByLocationAndBloodType(String location, String bloodType) {
-        return userRepository.findByLocationContainingIgnoreCaseAndBloodType(location, bloodType);
+    public List<UserEntity> searchByDivisionAndBloodType(String division, String bloodType) {
+        return userRepository.findByDivisionContainingIgnoreCaseAndBloodType(division, bloodType);
     }
 
     public void saveUser(UserEntity currentUser) {
