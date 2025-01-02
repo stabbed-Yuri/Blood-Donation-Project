@@ -100,6 +100,16 @@ public class UserService {
         return userRepository.findByDivisionContainingIgnoreCaseAndBloodType(division, bloodType);
     }
 
+    public void decrementDonationCount(Long donorId) {
+        UserEntity donor = userRepository.findById(donorId).orElseThrow(() -> new IllegalArgumentException("Invalid donor ID"));
+        donor.setDonationsCount(donor.getDonationsCount() - 1);
+        userRepository.save(donor);
+    }
+
+    public long getTotalDonors(){
+        return userRepository.count();
+    }
+
     public void saveUser(UserEntity currentUser) {
         userRepository.save(currentUser);
     }

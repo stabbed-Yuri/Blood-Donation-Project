@@ -23,5 +23,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
 
     List<UserEntity> findByDivisionContainingIgnoreCaseAndBloodType(String division, String bloodType);
+
+
 }
 

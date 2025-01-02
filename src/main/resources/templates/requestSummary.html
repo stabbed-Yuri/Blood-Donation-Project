@@ -35,6 +35,8 @@
             <!-- Donor Details -->
             <span th:text="${donor.firstName + ' ' + donor.lastName}"></span>
             <span th:text="${donor.number}"></span>
+<!--            //<span th:text="(${donor.completedRequests}+1)/${donor.donationsCount}"></span>-->
+            <span th:text="${donor.completedRequests != null && donor.donationsCount != null ? (#lists.contains(request.completedDonors, donor) ? donor.completedRequests / donor.donationsCount : (donor.completedRequests + 1) / donor.donationsCount) : 'N/A'}"></span>
 
             <!-- Mark as Completed Button -->
             <form th:action="@{/requests/complete}" method="post" class="d-inline">
@@ -45,6 +47,13 @@
                       th:disabled="${#lists.contains(request.completedDonors, donor)}">
                 <span th:text="${#lists.contains(request.completedDonors, donor) ? 'Completed' : 'Mark as Completed'}"></span>
               </button>
+            </form>
+
+            <!-- Not Required Button -->
+            <form th:action="@{/requests/notRequired}" method="post" class="d-inline">
+              <input type="hidden" name="requestId" th:value="${request.r_id}" />
+              <input type="hidden" name="donorId" th:value="${donor.id}" />
+              <button type="submit" class="btn btn-warning btn-sm">Not Required</button>
             </form>
           </li>
         </ul>

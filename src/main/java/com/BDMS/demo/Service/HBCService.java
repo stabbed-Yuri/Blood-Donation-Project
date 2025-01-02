@@ -18,4 +18,8 @@ public class HBCService {
     public List<HBCEntity> getAllHBCEntities() {
         return hbcRepository.findAll();
     }
+
+    public long getTotalHBCs() {
+        return hbcRepository.count();
+    }
 }

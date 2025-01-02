@@ -58,6 +58,13 @@ public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestPa
     return "redirect:/requestSummary";
 }
 
+
+    @PostMapping("/requests/notRequired")
+    public String notRequired(@RequestParam Long requestId, @RequestParam Long donorId) {
+        userService.decrementDonationCount(donorId);
+        return "redirect:/requestSummary";
+    }
+
     @PostMapping("/requests/close")
     public String closeRequest(@RequestParam Integer requestId) {
         requestService.closeRequest(requestId);
@@ -76,7 +83,7 @@ public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestPa
         model.addAttribute("requests", unrespondedRequests);
         model.addAttribute("currentUser", currentUser);
         // Return the name of the HTML template
-        return "pending-requests";
+        return "pendingRequest";
     }
 
 
@@ -111,10 +118,10 @@ public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestPa
         return userRepository.findByUsername(username);
     }
 
-    @GetMapping("/pendingRequests")
-    public String showPendingRequests(Model model, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        model.addAttribute("requests", requestService.getRequestsByUser(userId));
-        return "pendingRequest";
-    }
+//    @GetMapping("/pendingRequests")
+//    public String showPendingRequests(Model model, HttpSession session) {
+//        Long userId = (Long) session.getAttribute("userId");
+//        model.addAttribute("requests", requestService.getRequestsByUser(userId));
+//        return "pendingRequest";
+//    }
 }
