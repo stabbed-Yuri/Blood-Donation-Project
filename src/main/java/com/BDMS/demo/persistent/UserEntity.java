@@ -7,9 +7,12 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
-
+@Getter
+@Setter
 @Data
     @Entity
     @Table(name = "users")
@@ -53,6 +56,7 @@ import java.util.List;
 
         @NotBlank(message = "Upazila is required")
         private String upazila;
+        private String profilePicturePath;
 
         private int age;
 
@@ -66,7 +70,8 @@ import java.util.List;
         private int missedRequests;
 
         private double responseRatio;
-
+        @Getter
+        @Setter
         private String lastDonationDate;
 
         @OneToMany(mappedBy = "user")

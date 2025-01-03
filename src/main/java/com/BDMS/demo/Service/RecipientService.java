@@ -19,32 +19,49 @@ public class RecipientService {
         // Example logic to find matching requests for the user's blood group
         return recipientRepository.findByBloodGNeededAndClosedFalse(user.getBloodType());
     }
-    public void processUserResponse(Integer requestId, String response, UserEntity user) {
-        RecipientEntity request = recipientRepository.findById(requestId)
-                .orElseThrow(() -> new RuntimeException("Request not found"));
-
-        if (request.getRespondedUsers().contains(user)) {
-            throw new RuntimeException("User has already responded to this request.");
-        }
-
-        if ("accept".equalsIgnoreCase(response)) {
-            request.getAcceptedUsers().add(user);
-        } else if ("reject".equalsIgnoreCase(response)) {
-            request.getRejectedUsers().add(user);
-        }
-
-        request.getRespondedUsers().add(user);
-        recipientRepository.save(request);
-    }
+//    public void processUserResponse(Integer requestId, String response, UserEntity user) {
+//        RecipientEntity request = recipientRepository.findById(requestId)
+//                .orElseThrow(() -> new RuntimeException("Request not found"));
+//
+//        if (request.getRespondedUsers().contains(user)) {
+//            throw new RuntimeException("User has already responded to this request.");
+//        }
+//
+//        if ("accept".equalsIgnoreCase(response)) {
+//            request.getAcceptedUsers().add(user);
+//        } else if ("reject".equalsIgnoreCase(response)) {
+//            request.getRejectedUsers().add(user);
+//        }
+//
+//        request.getRespondedUsers().add(user);
+//        recipientRepository.save(request);
+//    }
     public List<RecipientEntity> findPendingRequestsForUserThatUserHasNotResponded(UserEntity currentUser) {
-        // Fetch all pending requests for the user (you may have a method for this)
-        List<RecipientEntity> allPendingRequests = findPendingRequestsForUser(currentUser);
+    // Fetch all pending requests for the user (you may have a method for this)
+    List<RecipientEntity> allPendingRequests = findPendingRequestsForUser(currentUser);
 
-        // Filter out the requests that the user has already responded to
-        return allPendingRequests.stream()
-                .filter(request -> !hasUserResponded(request.getR_id(), currentUser.getId()))
-                .collect(Collectors.toList());
-    }
+    // Filter out the requests that the user has already responded to
+    return allPendingRequests.stream()
+            .filter(request -> {
+                System.out.println("Checking request: " + request.getR_id());
+                System.out.println("Current user ID: " + currentUser.getId());
+                System.out.println("Request user ID: " + request.getUser().getId());
+                System.out.println("Request HBC division: " + request.getHbcDivision());
+                System.out.println("Current user division: " + currentUser.getDivision());
+
+                boolean hasNotResponded = !hasUserResponded(request.getR_id(), currentUser.getId());
+                boolean isNotSender = !request.getUser().getId().equals(currentUser.getId());
+                boolean isSameDivision = request.getHbcDivision().equalsIgnoreCase(currentUser.getDivision());
+//                boolean isEligible = request.getRegistration_date().isAfter(currentUser.getLastDonationDate());
+
+                System.out.println("Has not responded: " + hasNotResponded);
+                System.out.println("Is not sender: " + isNotSender);
+                System.out.println("Is same division: " + isSameDivision);
+
+                return hasNotResponded && isNotSender && isSameDivision;
+            })
+            .collect(Collectors.toList());
+}
     public void handleUserResponse(Integer requestId, UserEntity user, String response) {
         RecipientEntity request = recipientRepository.findById(requestId)
                 .orElseThrow(() -> new RuntimeException("Request not found"));
@@ -92,17 +109,17 @@ public class RecipientService {
                 .anyMatch(user -> user.getId().equals(userId));
     }
 
-    public int getTotalMatchingDonorsNotified() {
-    List<RecipientEntity> allRecipients = recipientRepository.findAll();
-    int totalMatchingDonorsNotified = 0;
-
-    for (RecipientEntity recipient : allRecipients) {
-        String bloodGroupNeeded = recipient.getBlood_g_needed();
-        long matchingDonorsCount = userRepository.countByBloodType(bloodGroupNeeded);
-        totalMatchingDonorsNotified += (int) matchingDonorsCount;
-    }
-
-    return totalMatchingDonorsNotified;
-}
+//    public int getTotalMatchingDonorsNotified() {
+//    List<RecipientEntity> allRecipients = recipientRepository.findAll();
+//    int totalMatchingDonorsNotified = 0;
+//
+//    for (RecipientEntity recipient : allRecipients) {
+//        String bloodGroupNeeded = recipient.getBlood_g_needed();
+//        long matchingDonorsCount = userRepository.countByBloodType(bloodGroupNeeded);
+//        totalMatchingDonorsNotified += (int) matchingDonorsCount;
+//    }
+//
+//    return totalMatchingDonorsNotified;
+//}
 
 }

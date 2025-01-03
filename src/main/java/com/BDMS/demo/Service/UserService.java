@@ -4,6 +4,7 @@ import com.BDMS.demo.persistent.UserEntity;
 import com.BDMS.demo.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -112,5 +113,21 @@ public class UserService {
 
     public void saveUser(UserEntity currentUser) {
         userRepository.save(currentUser);
+    }
+    public UserEntity getCurrentUser() {
+        // Get the currently authenticated user's username
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        // Fetch the user details from the database using the username
+        return userRepository.findByUsername(username);
+    }
+    public void updateUser(UserEntity user) {
+        UserEntity existingUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
+        existingUser.setNumber(user.getNumber());
+        existingUser.setDivision(user.getDivision());
+        existingUser.setDistrict(user.getDistrict());
+        existingUser.setUpazila(user.getUpazila());
+        existingUser.setProfilePicturePath(user.getProfilePicturePath());
+        userRepository.save(existingUser);
     }
 }

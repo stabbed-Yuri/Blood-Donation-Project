@@ -20,8 +20,7 @@
                 <p class="card-text">Blood Group Needed: <span th:text="${request.blood_g_needed}"></span></p>
                 <p class="card-text">Hospital: <span th:text="${request.hospitalName}"></span></p>
                 <p class="card-text">Recipient name: <span th:text="${request.user.firstName} + ' ' + ${request.user.lastName}"></span></p>
-
-
+                <p class="card-text">Status: <span th:text="${request.isClosed} ? 'Complete' : 'Incomplete'"></span></p>
                 <p class="card-text">Recipient Phone Number:
                     <span th:text="${request.user.number}"></span>
                 </p>

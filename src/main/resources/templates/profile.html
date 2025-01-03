@@ -21,13 +21,7 @@
 
     <div th:replace="~{navbar.html}"></div>
 
-    <!-- Menu links with rounded white background on hover -->
-    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Edit_Profile</a>
-    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Donate</a>
-    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Request</a>
-    <a href="#" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Contact Us</a>
-    <a href="login.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Login</a>
-    <a href="signUp.html" class="block text-white hover:text-red-500 hover:bg-white rounded-lg px-4 py-2">Sign Up</a>
+
   </div>
 </header>
 
@@ -37,18 +31,22 @@
   <!-- Profile Header -->
   <section class="relative p-6 text-center mb-6">
     <div class="relative inline-block">
-      <img id="profileImage" src="https://via.placeholder.com/150" alt="Profile" class="mx-auto rounded-full w-48 shadow-lg">
+  <form th:action="@{/profile/updatePicture}" method="post" enctype="multipart/form-data">
+    <img id="profileImage" th:src="${user.profilePicturePath != null ? user.profilePicturePath : 'https://via.placeholder.com/150'}"
+         alt="Profile" class="mx-auto rounded-full w-48 shadow-lg"/>
 
-      <!-- Hidden File Input -->
-      <input type="file" id="fileInput" accept="image/*" class="hidden" />
+    <!-- Hidden File Input -->
+    <input type="file" id="fileInput" name="profilePicture" accept="image/*" class="hidden" />
 
-      <!-- Change Photo Button -->
-      <button id="changePhotoButton" class="absolute bottom-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25h2.655a1 1 0 00.897-.553L7.618 6h8.764l1.066 1.697a1 1 0 00.897.553H21M3 8.25v9.5a2 2 0 002 2h14a2 2 0 002-2v-9.5M3 8.25l1.4-2.1A2 2 0 016.205 5h11.59a2 2 0 011.804 1.15L21 8.25M15.75 15a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-        </svg>
-      </button>
-    </div>
+    <!-- Change Photo Button -->
+    <button type="button" id="changePhotoButton" class="absolute bottom-2 right-2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none" onclick="document.getElementById('fileInput').click();">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3 8.25h2.655a1 1 0 00.897-.553L7.618 6h8.764l1.066 1.697a1 1 0 00.897.553H21M3 8.25v9.5a2 2 0 002 2h14a2 2 0 002-2v-9.5M3 8.25l1.4-2.1A2 2 0 016.205 5h11.59a2 2 0 011.804 1.15L21 8.25M15.75 15a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+      </svg>
+    </button>
+    <button type="submit" id="submitProfilePicture">Submit</button>
+  </form>
+</div>
 
     <!-- Name Section Below Picture -->
     <div class="mt-4 flex items-center justify-center space-x-4">
@@ -72,6 +70,10 @@
     <h3 class="text-xl font-semibold mb-4">Donor Information</h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
       <div>
+        <p class="text-gray-500">Phone Number:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.number}">28</p>
+      </div>
+      <div>
         <p class="text-gray-500">Age:</p>
         <p class="text-gray-800 font-semibold" th:text="${user.age}">28</p>
       </div>
@@ -84,8 +86,16 @@
         <p class="text-gray-800 font-semibold" th:text="${user.lastDonationDate}">October 10, 2024</p>
       </div>
       <div>
-        <p class="text-gray-500">City:</p>
+        <p class="text-gray-500">Division:</p>
         <p class="text-gray-800 font-semibold" th:text="${user.division}">New York, NY</p>
+      </div>
+      <div>
+        <p class="text-gray-500">District:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.district}">New York, NY</p>
+      </div>
+      <div>
+        <p class="text-gray-500">Upazila/Thana:</p>
+        <p class="text-gray-800 font-semibold" th:text="${user.upazila}">New York, NY</p>
       </div>
     </div>
   </section>
@@ -98,7 +108,7 @@
         <h3 class="text-lg font-semibold text-gray-700">Response Ratio</h3>
         <p class="text-gray-800"><strong>Accepted Requests:</strong> <span class="font-semibold" th:text="${user.donationsCount}">25</span></p>
         <p><strong>Completed Donations:</strong> <span class="font-semibold" th:text="${user.completedRequests}">20</span></p>
-        <p><strong>Ratio:</strong> <span id="responseRatioText" th:text="${user.responseRatio}">0%</span></p>
+     <p><strong>Ratio:</strong> <span id="responseRatioText" th:text="${user.donationsCount == 0 ? 'null' : ((user.completedRequests / user.donationsCount) * 100) + '%'}">0%</span></p>
       </div>
       <div class="neumorphic-card">
         <svg class="progress-circle" width="100%" height="100%">

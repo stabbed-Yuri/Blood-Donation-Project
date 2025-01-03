@@ -89,4 +89,12 @@ public class RequestService {
             recipientRepository.save(recipient);
         }
     }
+
+    public void updateLastDonationDate(Long donorId, Integer requestId) {
+        UserEntity donor = userRepository.findById(donorId).orElseThrow(() -> new RuntimeException("Donor not found"));
+        RecipientEntity recipient = recipientRepository.findById(requestId).orElseThrow(() -> new RuntimeException("Recipient not found"));
+
+        donor.setLastDonationDate(recipient.getRegistration_date());
+        userRepository.save(donor);
+    }
 }

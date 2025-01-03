@@ -38,12 +38,10 @@ public class RecipientEntity {
     @JoinColumn(name = "hbc_id", nullable = false)
     private HBCEntity hbc;
 
+    @Setter
     @Getter
     @Column(name = "total_matching_donor_notified")
     private Integer totalMatchingDonorNotified;
-    public void setTotalMatchingDonorNotified(Integer totalMatchingDonorNotified) {
-        this.totalMatchingDonorNotified = totalMatchingDonorNotified;
-    }
 
     @Getter
     @Column(name = "accepted_count")
@@ -51,6 +49,9 @@ public class RecipientEntity {
 
 public Integer getAcceptedCount() {
         return acceptedCount != null ? acceptedCount : 0;
+    }
+    public String getHbcDivision() {
+        return this.hbc.getH_division();
     }
     @Column(name = "rejected_count")
     private Integer rejectedCount;

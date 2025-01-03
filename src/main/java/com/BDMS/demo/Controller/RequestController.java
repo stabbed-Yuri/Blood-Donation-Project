@@ -39,9 +39,9 @@ public class RequestController {
     public String getRequestSummary(Principal principal, Model model) {
         UserEntity loggedInUser = getLoggedInUser(principal);
         List<RecipientEntity> requests = requestService.getRequestsByUser(loggedInUser.getId());
-        int totalMatchingDonorsNotified = recipientService.getTotalMatchingDonorsNotified();
+
         model.addAttribute("requests", requests);
-        model.addAttribute("totalMatchingDonorsNotified", totalMatchingDonorsNotified);
+
         return "requestSummary";
     }
 
@@ -50,7 +50,9 @@ public class RequestController {
 public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestParam Long donorId, RedirectAttributes redirectAttributes) {
     boolean success = requestService.markRequestAsCompleted(requestId, donorId);
 
+
     if (success) {
+        requestService.updateLastDonationDate(donorId, requestId);
         redirectAttributes.addFlashAttribute("message", "Donor marked as completed.");
     } else {
         redirectAttributes.addFlashAttribute("error", "Donor has already been marked as completed.");
@@ -107,7 +109,7 @@ public String markRequestAsCompleted(@RequestParam Integer requestId, @RequestPa
             userService.saveUser(currentUser);
         }
 
-        return "redirect:/pending?success=responseRecorded";
+        return "redirect:/accepted?success=responseRecorded";
     }
 
 

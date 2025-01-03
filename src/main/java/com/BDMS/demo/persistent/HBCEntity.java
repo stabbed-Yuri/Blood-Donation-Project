@@ -2,6 +2,9 @@ package com.BDMS.demo.persistent;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -20,6 +23,7 @@ public class HBCEntity {
     @Column(name ="h_city")
     private String h_city;
 
+    @Getter
     @Column(name ="h_division")
     private String h_division;
 
@@ -28,5 +32,8 @@ public class HBCEntity {
 
     @Column(name ="organization_type")
     private String organization_type;
+
+    @OneToMany(mappedBy = "hbc")
+    private List<RecipientEntity> recipientEntities;
 }
 
