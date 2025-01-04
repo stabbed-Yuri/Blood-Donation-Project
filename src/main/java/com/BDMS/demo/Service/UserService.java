@@ -124,10 +124,15 @@ public class UserService {
     public void updateUser(UserEntity user) {
         UserEntity existingUser = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found"));
         existingUser.setNumber(user.getNumber());
-        existingUser.setDivision(user.getDivision());
-        existingUser.setDistrict(user.getDistrict());
-        existingUser.setUpazila(user.getUpazila());
+//        existingUser.setDivision(user.getDivision());
+//        existingUser.setDistrict(user.getDistrict());
+//        existingUser.setUpazila(user.getUpazila());
         existingUser.setProfilePicturePath(user.getProfilePicturePath());
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setGender(user.getGender());
+
+
         userRepository.save(existingUser);
     }
 }

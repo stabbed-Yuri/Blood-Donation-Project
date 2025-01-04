@@ -11,6 +11,8 @@
     <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 class="text-2xl font-bold mb-4">Edit Profile</h2>
         <form th:action="@{/profile/update}" method="post">
+            <input type="hidden" id="id" name="id" th:value="${user.id}">
+
             <div class="mb-4">
                 <label for="firstName" class="block text-gray-700">First Name</label>
                 <input type="text" id="firstName" name="firstName" class="w-full p-2 border border-gray-300 rounded mt-1" th:value="${user.firstName}">
@@ -37,23 +39,11 @@
             </div>
             <div class="flex justify-end">
                 <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded mr-2" onclick="closeModal()">Cancel</button>
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded" >Save</button>
             </div>
-            <!-- Add this button to open the modal -->
-            <button id="editProfileButton" class="bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 focus:outline-none">
-                Edit Profile
-            </button>
-<!--            <div id="editProfileModal" class="hidden">-->
-<!--                <div th:replace="~{demo.html}"></div>-->
-<!--            </div>-->
-
-            <!-- Include the modal content -->
-
         </form>
     </div>
 </div>
-
-
 <script>
     function closeModal() {
         document.getElementById('editProfileModal').style.display = 'none';
