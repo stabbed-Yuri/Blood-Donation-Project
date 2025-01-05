@@ -54,7 +54,9 @@
 
   <!-- Recipient Cards Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6 px-4" id="recipient-list">
-    <div th:each="recipient : ${recipients}" class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
+    <div th:each="recipient, iterStat : ${recipients}"
+
+         class="w-full max-w-md p-6 bg-white rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300">
       <div class="flex items-center space-x-4">
         <div>
           <h2 class="text-lg font-bold" th:text="${recipient.user.firstName} + ' ' + ${recipient.user.lastName}">Recipient Name</h2>
@@ -64,15 +66,14 @@
         <p><span class="font-bold">Patient's Problem:</span> <span th:text="${recipient.medical_purpose}">Medical Purpose</span></p>
         <p><span class="font-bold">Blood Type:</span> <span th:text="${recipient.blood_g_needed}">Blood Type</span></p>
         <p><span class="font-bold">Amount Required:</span> <span th:text="${recipient.volume_needed}">Volume Needed</span></p>
-        <p><span class="font-bold">Division:</span> <span th:text="${recipient.hbc.hbc_name}">Hospital Name</span></p>
-        <p><span class="font-bold">Time for Donation:</span> <span th:text="${recipient.registration_date}">Registration Date</span></p>
+        <p><span class="font-bold">Hospital:</span> <span th:text="${recipient.hbc.hbc_name}">Hospital Name</span></p>
+        <p><span class="font-bold">Division:</span> <span th:text="${recipient.hbc.h_division}">Division</span></p>
+        <p><span class="font-bold">Date for Donation:</span> <span th:text="${recipient.registration_date}">Registration Date</span></p>
       </div>
-      <button
-              class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center"
-              onclick="markAsRequested(this)"
-      >
-        Request Donation
-      </button>
+      <a href="/pending"
+         class="mt-4 w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded-lg flex items-center justify-center">
+        Donate
+      </a>
     </div>
   </div>
 </section>

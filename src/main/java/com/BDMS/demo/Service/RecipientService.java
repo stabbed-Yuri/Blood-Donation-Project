@@ -15,27 +15,14 @@ public class RecipientService {
 
     private final RecipientRepository recipientRepository;
     private final UserRepository userRepository;
+
+    //SELECT * FROM RecipientEntity WHERE blood_g_needed = ? AND closed = false;
     public List<RecipientEntity> findPendingRequestsForUser(UserEntity user) {
         // Example logic to find matching requests for the user's blood group
         return recipientRepository.findByBloodGNeededAndClosedFalse(user.getBloodType());
     }
-//    public void processUserResponse(Integer requestId, String response, UserEntity user) {
-//        RecipientEntity request = recipientRepository.findById(requestId)
-//                .orElseThrow(() -> new RuntimeException("Request not found"));
-//
-//        if (request.getRespondedUsers().contains(user)) {
-//            throw new RuntimeException("User has already responded to this request.");
-//        }
-//
-//        if ("accept".equalsIgnoreCase(response)) {
-//            request.getAcceptedUsers().add(user);
-//        } else if ("reject".equalsIgnoreCase(response)) {
-//            request.getRejectedUsers().add(user);
-//        }
-//
-//        request.getRespondedUsers().add(user);
-//        recipientRepository.save(request);
-//    }
+
+
     public List<RecipientEntity> findPendingRequestsForUserThatUserHasNotResponded(UserEntity currentUser) {
     // Fetch all pending requests for the user (you may have a method for this)
     List<RecipientEntity> allPendingRequests = findPendingRequestsForUser(currentUser);
@@ -93,6 +80,7 @@ public class RecipientService {
     public void saveRecipient(RecipientEntity recipient) {
         recipientRepository.save(recipient);
     }
+
     public List<RecipientEntity> findAcceptedRequestsByUser(UserEntity user) {
         return recipientRepository.findAll().stream()
                 .filter(recipient -> recipient.getAcceptedUsers().contains(user))

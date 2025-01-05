@@ -42,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/login", "/logout", "/signUp", "/homePage", "/h2-console/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
+                        .requestMatchers("/login","/hbcListPage","/aboutUs" ,"/logout", "/signUp", "/homePage", "/h2-console/**", "/static/**", "/images/**", "/css/**", "/js/**").permitAll()
                         .requestMatchers("/profile", "/donorListPage", "/formPage").authenticated()
                         .anyRequest().authenticated()
                 )

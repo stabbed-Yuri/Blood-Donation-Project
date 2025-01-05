@@ -57,7 +57,7 @@ import java.util.List;
         @NotBlank(message = "Upazila is required")
         private String upazila;
         private String profilePicturePath;
-
+        private String reportPath;
         private int age;
 
         @NotBlank(message = "Gender is required")

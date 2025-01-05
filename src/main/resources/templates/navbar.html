@@ -29,8 +29,11 @@
 
         // Dynamic links based on login status
         if (response.loggedIn) {
+          navbarHtml += '<a href="/requestSummary" class="text-red-500 hover:text-xl">Request Summary</a>';
           navbarHtml += `<a href="/profile" class="text-red-500 hover:text-xl">Profile (${response.username})</a>`;
-          navbarHtml += '<a href="#" id="logout-btn" class="text-red-500 hover:text-xl">Logout</a>';  // Logout link triggers AJAX logout
+          navbarHtml += '<a href="#" id="logout-btn" class="text-red-500 hover:text-xl">Logout</a>';
+
+// Logout link triggers AJAX logout
         } else {
           navbarHtml += '<a href="/login" class="text-red-500 hover:text-xl">Login</a>';
           navbarHtml += '<a href="/signUp" class="text-red-500 hover:text-xl">Sign Up</a>';

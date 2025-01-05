@@ -111,15 +111,16 @@
         <h3 class="text-lg font-semibold text-gray-700">Response Ratio</h3>
         <p class="text-gray-800"><strong>Accepted Requests:</strong> <span class="font-semibold" th:text="${user.donationsCount}">25</span></p>
         <p><strong>Completed Donations:</strong> <span class="font-semibold" th:text="${user.completedRequests}">20</span></p>
-     <p><strong>Ratio:</strong> <span id="responseRatioText" th:text="${user.donationsCount == 0 ? 'null' : ((user.completedRequests / user.donationsCount) * 100) + '%'}">0%</span></p>
+        <p><strong>Ratio:</strong> <span th:text="${user.donationsCount == 0 ? 'N/A' : ((user.completedRequests * 1.0 / user.donationsCount) * 100) + '%'}"></span></p>
+
       </div>
-      <div class="neumorphic-card">
-        <svg class="progress-circle" width="100%" height="100%">
-          <circle class="progress-bg" cx="50%" cy="50%" r="45%"></circle>
-          <circle class="progress-bar" cx="50%" cy="50%" r="45%" stroke-dasharray="282" stroke-dashoffset="282"></circle>
-        </svg>
-        <div class="percentage-text" id="percentage" th:text="${user.responseRatio}">0%</div>
-      </div>
+<!--      <div class="neumorphic-card">-->
+<!--        <svg class="progress-circle" width="100%" height="100%">-->
+<!--          <circle class="progress-bg" cx="50%" cy="50%" r="45%"></circle>-->
+<!--          <circle class="progress-bar" cx="50%" cy="50%" r="45%" stroke-dasharray="282" stroke-dashoffset="282"></circle>-->
+<!--        </svg>-->
+<!--        <div class="percentage-text" id="percentage" th:text="${user.responseRatio}">0%</div>-->
+<!--      </div>-->
     </div>
   </section>
 
@@ -130,19 +131,44 @@
     <!-- Slider Container -->
     <div class="relative w-full max-w-lg mx-auto mt-16 overflow-hidden bg-white shadow-lg rounded-lg">
       <div id="slider" class="flex transition-transform duration-500">
-        <!-- Images will be dynamically inserted here -->
+        <!-- Display User Report Path or Placeholder -->
+        <div class="flex-shrink-0 w-full">
+          <img th:src="${user.reportPath != null ? user.reportPath : 'user-photos/3000.png'}"
+               class="w-full h-auto object-cover"
+               alt="Report Image"
+               th:alt="${user.reportPath != null ? 'User Report Image' : 'Placeholder'}">
+        </div>
       </div>
 
-      <button id="prevBtn" class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+      <!-- Slider Controls -->
+      <button id="prevBtn"
+              class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
         <i class="fas fa-chevron-left"></i>
       </button>
-      <button id="nextBtn" class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
+      <button id="nextBtn"
+              class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-red-500 text-white p-2 rounded-full hover:bg-red-600 focus:outline-none">
         <i class="fas fa-chevron-right"></i>
       </button>
     </div>
-
   </section>
+
+
+  <section>
+    <div class="bg-gray-100 p-10 flex justify-center items-center">
+      <a href="/accepted"
+         class="bg-white text-red-500 font-bold py-2 px-4 rounded hover:bg-red-600 hover:text-white transition duration-300">
+        Accepted Requests
+      </a>
+    </div>
+  </section>
+
 </main>
+
+<footer>
+    <div class="bg-white shadow-md p-4 text-center">
+        <p>&copy; 2021 BDMS Project. All rights reserved.</p>
+    </div>
+</footer>
 
 <div id="editProfileModal" class="hidden">
   <div th:replace="~{editProfileModal.html}"></div>

@@ -43,7 +43,7 @@ public class RecipientController {
     public String getRecipientListPage( Model model) {
 
 
-        List<RecipientEntity> recipients = recipientRepository.findAll();
+        List<RecipientEntity> recipients = recipientRepository.findByClosedFalse();
         model.addAttribute("recipients", recipients);
 
         return "recipientListPage";

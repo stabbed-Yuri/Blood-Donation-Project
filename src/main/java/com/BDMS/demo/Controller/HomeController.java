@@ -27,10 +27,9 @@ public class HomeController {
     @GetMapping("/homePage")
     public String showHomePage(Model model) {
 
-    List<RecipientEntity> recipients = recipientRepository.findAll();
-    model.addAttribute("recipient", recipients);
-
-    long totalDonors = userService.getTotalDonors();
+        List<RecipientEntity> recipients = recipientRepository.findByClosedFalse();
+        model.addAttribute("recipients", recipients);
+        long totalDonors = userService.getTotalDonors();
     model.addAttribute("totalDonors", totalDonors);
 
     long totalHBCs= hbcService.getTotalHBCs();

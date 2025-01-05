@@ -4,11 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Request Summary</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
 </head>
 <body>
+<header class="bg-white shadow-md">
+  <div class="flex items-center justify-between p-4">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+      <a href="/homePage" class="flex items-center gap-2">
+        <i class="fa-solid fa-hand-holding-droplet text-red-500 text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-bold text-red-500">BDMS Project</h1>
+      </a>
+    </div>
+
+
+
+
+    <!-- Links for Desktop -->
+    <div th:replace="~{navbar.html}"></div>
+
+  </div>
+</header>
 <div class="container mt-4">
-  <h1 class="text-center mb-4">Request Summary</h1>
+  <h1 class="text-center mb-4 text-3xl">Request Summary</h1>
 
   <!-- Display total matching donors notified -->
 <!--  <div class="text-center mb-4">-->
@@ -23,20 +42,35 @@
         <h5 class="card-title">Request ID: <span th:text="${request.r_id}"></span></h5>
         <p class="card-text">Medical Purpose: <span th:text="${request.medical_purpose}"></span></p>
         <p class="card-text">Blood Group: <span th:text="${request.blood_g_needed}"></span></p>
+        <p class="card-text">Volume: <span th:text="${request.volume_needed}"></span></p>
         <p class="card-text">Hospital: <span th:text="${request.hospitalName}"></span></p>
-        <p class="card-text">Total Matching Donors Notified: <span th:text="${request.totalMatchingDonorNotified}"></span></p>
         <p class="card-text">Accepted: <span th:text="${request.acceptedCount}"></span></p>
         <p class="card-text">Rejected: <span th:text="${request.rejectedCount}"></span></p>
 
         <!-- Donors Section -->
         <h6>Accepted Donors:</h6>
         <ul>
-          <li th:each="donor : ${request.acceptedUsers}">
+          <li class="" th:each="donor : ${request.acceptedUsers}">
             <!-- Donor Details -->
+            <span>Name: </span>
             <span th:text="${donor.firstName + ' ' + donor.lastName}"></span>
+            <span>Phone: </span>
             <span th:text="${donor.number}"></span>
+            <span>Respose Ratio: </span>
 <!--            //<span th:text="(${donor.completedRequests}+1)/${donor.donationsCount}"></span>-->
-            <span th:text="${donor.completedRequests != null && donor.donationsCount != null ? (donor.completedRequests == 0 && donor.donationsCount == 1 ? 'New User' : ((donor.completedRequests ==0 &&  donor.donationsCount==0) ? 'Not Required' : (donor.donationsCount != 0 ? donor.completedRequests / donor.donationsCount : 'N/A'))) : 'N/A'}"></span>
+            <span th:text="${donor.completedRequests != null && donor.donationsCount != null
+    ? (donor.completedRequests == 0 && donor.donationsCount == 1
+        ? 'New User'
+        : (donor.completedRequests == 0 && donor.donationsCount == 0
+            ? 'Not Required'
+            : (donor.donationsCount != 0
+                ? (donor.completedRequests * 1.0 / donor.donationsCount * 100) + '%'
+                : 'N/A')))
+    : 'N/A'}">
+</span>
+
+            </span>
+
 
             <!-- Mark as Completed Button -->
             <form th:action="@{/requests/complete}" method="post" class="d-inline">
@@ -44,7 +78,7 @@
               <input type="hidden" name="donorId" th:value="${donor.id}" />
               <button type="submit"
                       class="btn btn-success btn-sm"
-                      th:disabled="${#lists.contains(request.completedDonors, donor)}">
+                      th:disabled="${#lists.contains(request.completedDonors, donor) || donor.completedRequests == donor.donationsCount}">
                 <span th:text="${#lists.contains(request.completedDonors, donor) ? 'Completed' : 'Mark as Completed'}"></span>
               </button>
             </form>
@@ -53,8 +87,13 @@
             <form th:action="@{/requests/notRequired}" method="post" class="d-inline">
               <input type="hidden" name="requestId" th:value="${request.r_id}" />
               <input type="hidden" name="donorId" th:value="${donor.id}" />
-              <button type="submit" class="btn btn-warning btn-sm" th:disabled="${donor.completedRequests == donor.donationsCount}">Not Required</button>
+              <button type="submit"
+                      class="btn btn-warning btn-sm"
+                      th:disabled="${#lists.contains(request.completedDonors, donor) || donor.completedRequests == donor.donationsCount}">
+                Not Required
+              </button>
             </form>
+
           </li>
         </ul>
 
